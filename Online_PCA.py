@@ -41,7 +41,6 @@ class OnlinePCA:
         x = np.matrix(x)
         if gamma==None:
             gamma = (1.0 / self.n)
-        print "gama: ", gamma
         self.m = self.m + gamma * (x - self.m)
         self.R = self.R + gamma * (x.T * x - self.R)
 
@@ -76,6 +75,7 @@ class OnlinePCA:
         if title is not None:
             plt.title(title)
 
+    # compute the eigenvectors and eigenvalues based on the current covariance matrix stored as self.R
     def computePCA(self, n_pcs):
         R0 = self.R.copy()
         w = np.matrix(np.random.rand(self.dim)).T
@@ -94,13 +94,17 @@ class OnlinePCA:
         ev = LA.norm(y, axis=0) / LA.norm(W, axis=0)
         return W, ev
 
+    # w0 is the batch mode eigenvector
     def comparisionBetweenTwoEigenvector(self, w0, w, gamma=None):
         self.updateCov(w, gamma)
+        # compute the first eigenvector, based on the current updated covariance matrix
+        W, ev = self.computePCA(n_pcs=1)
+        w = np.squeeze(np.asarray(W))
+        print w.shape
+
         w0 = np.squeeze(np.asarray(w0))
-        w = np.squeeze(np.asarray(w))
         mean_w0 = np.mean(w0)
         mean_w = np.mean(w)
-
         s = 0
         for i in range(w.shape[0]):
             s += (w[i] - mean_w) * (w0[i] - mean_w0)

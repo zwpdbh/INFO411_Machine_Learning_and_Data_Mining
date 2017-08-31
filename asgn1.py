@@ -4,6 +4,7 @@ import numpy as np
 import numpy.linalg as LA
 import matplotlib.pyplot as plt
 
+
 ##############
 # Power method
 def power_iterations(R, w):
@@ -55,6 +56,8 @@ def powerPCA(data, n_pcs):
     y = R0 * W
     ev = LA.norm(y, axis=0) / LA.norm(W, axis=0)
     return W, ev
+
+
 ##############
 
 
@@ -77,37 +80,41 @@ total_y = digits.target
 
 # compare the eigenvector gained in each loop with the original eigenvector obtained through
 # batch mode
-# X=np.matrix(total_X)
-# m=np.mean(total_X,axis=0)
-# X-=m
-# R=X.T*X/(total_X.shape[0]-1.0)
-# W0,ev0=powerPCA(total_X,n_pcs=2)
-# prj=X*W0[:,0:2]
-#
-# w0 = W0.T[0]
-#
-# onlinePCA = OnlinePCA(X=total_X[:100])
-# covariances = []
-# index = []
-# for i in range(101, total_X.shape[0]):
-#     cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[i])
-#     covariances.append(cov)
-#     index.append(i)
-#
-# plt.plot(index, covariances)
-# plt.show()
-# cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[101])
 
-'''
-1. randomly extract 100 data instances that belong to "0" class, use it to initialize PCA
-'''
-datasets_zero = []
-for i in range(total_y.shape[0]):
-    if total_y[i] == 0:
-        datasets_zero.append(total_X[i])
+X = np.matrix(total_X)
+m = np.mean(total_X, axis=0)
+X -= m
+R = X.T * X / (total_X.shape[0] - 1.0)
+W0, ev0 = powerPCA(total_X, n_pcs=2)
+prj = X * W0[:, 0:2]
 
-datasets_zero = np.matrix(datasets_zero)
-np.random.shuffle(datasets_zero)
+w0 = W0.T[0]
 
-onlinePCA = OnlinePCA(X=datasets_zero[:100])
-W0, ev0 = onlinePCA.computePCA(n_pcs=2)
+onlinePCA = OnlinePCA(X=total_X[:100])
+covariances = []
+index = []
+for i in range(101, total_X.shape[0]):
+    cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[i])
+    covariances.append(cov)
+    index.append(i)
+
+plt.plot(index, covariances)
+plt.show()
+cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[101])
+
+# '''
+# 1. randomly extract 100 data instances that belong to "0" class, use it to initialize PCA
+# '''
+# datasets_zero = []
+# for i in range(total_y.shape[0]):
+#     if total_y[i] == 0:
+#         datasets_zero.append(total_X[i])
+#
+# datasets_zero = np.matrix(datasets_zero)
+# np.random.shuffle(datasets_zero)
+#
+# onlinePCA = OnlinePCA(X=datasets_zero[:100])
+# W0, ev0 = onlinePCA.computePCA(n_pcs=2)
+#
+# for i in range(1):
+#     print "s"
