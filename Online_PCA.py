@@ -41,7 +41,7 @@ class OnlinePCA:
         x = np.matrix(x)
         if gamma==None:
             gamma = (1.0 / self.n)
-        self.m = self.m + gamma * (x - self.m)
+        # self.m = self.m + gamma * (x - self.m)
         self.R = self.R + gamma * (x.T * x - self.R)
 
     def converged(self, w, w1, thres=1e-10):
@@ -106,5 +106,6 @@ class OnlinePCA:
         s = 0
         for i in range(w0.shape[0]):
             s += (e1[i] - mean_e1) * (w0[i] - mean_w0)
-        return s / w0.shape[0]
+            # print (e1[i] - mean_e1) * (w0[i] - mean_w0)
+        return s
 

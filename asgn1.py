@@ -61,9 +61,9 @@ def powerPCA(data, n_pcs):
 ##############
 
 
-digits = datasets.load_digits(n_class=6)
-total_X = digits.data
-total_y = digits.target
+# digits = datasets.load_digits(n_class=6)
+# total_X = digits.data
+# total_y = digits.target
 
 # task 1: use first 100 data as base, loop through the following data to update covariance
 # matrix, then at last to compute eigenvectors
@@ -80,27 +80,27 @@ total_y = digits.target
 
 # compare the eigenvector gained in each loop with the original eigenvector obtained through
 # batch mode
-
-X = np.matrix(total_X)
-m = np.mean(total_X, axis=0)
-X -= m
-R = X.T * X / (total_X.shape[0] - 1.0)
-W0, ev0 = powerPCA(total_X, n_pcs=2)
-prj = X * W0[:, 0:2]
-
-w0 = W0.T[0]
-
-onlinePCA = OnlinePCA(X=total_X[:100])
-covariances = []
-index = []
-for i in range(101, total_X.shape[0]):
-    onlinePCA.updateCov(total_X[i])
-    cov = onlinePCA.compareWithCurrentEigenvector(w0=w0.T)
-    covariances.append(cov)
-    index.append(i)
-
-plt.plot(index, covariances)
-plt.show()
+#
+# X = np.matrix(total_X)
+# m = np.mean(total_X, axis=0)
+# X -= m
+# R = X.T * X / (total_X.shape[0] - 1.0)
+# W0, ev0 = powerPCA(total_X, n_pcs=2)
+# prj = X * W0[:, 0:2]
+#
+# w0 = W0.T[0]
+#
+# onlinePCA = OnlinePCA(X=total_X[:100])
+# covariances = []
+# index = []
+# for i in range(101, total_X.shape[0]):
+#     onlinePCA.updateCov(total_X[i])
+#     cov = onlinePCA.compareWithCurrentEigenvector(w0=w0.T)
+#     covariances.append(cov)
+#     index.append(i)
+#
+# plt.plot(index, covariances)
+# plt.show()
 # cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[101])
 
 
@@ -118,7 +118,22 @@ plt.show()
 # np.random.shuffle(datasets_zero)
 #
 # onlinePCA = OnlinePCA(X=datasets_zero[:100])
-# e0, ev0 = onlinePCA.computePCA(n_pcs=1)
+# initialR = onlinePCA.initialR.copy()
 #
+# e0, ev0 = onlinePCA.computePCA(n_pcs=1)
 # e0 = np.squeeze(np.asarray(e0))
-
+#
+# inlier = []
+# outlier = []
+#
+# covs = []
+# index = []
+# for i in range(total_X.shape[0]):
+#     index.append(i)
+#     onlinePCA.initialR = initialR.copy()
+#     onlinePCA.updateCov(x=total_X[i], gamma=0.05)
+#     cov = onlinePCA.compareWithCurrentEigenvector(e0)
+#     covs.append(cov)
+#
+# plt.plot(index, covs)
+# plt.show()

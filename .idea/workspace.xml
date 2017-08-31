@@ -16,32 +16,41 @@
     <favorites_list name="INFO411_Machine_Learning_and_Data_Mining" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Online_PCA.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Online_PCA.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="108" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="asgn1.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/asgn1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="97" column="58" lean-forward="true" selection-start-line="96" selection-start-column="4" selection-end-line="97" selection-end-column="58" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="Online_PCA.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Online_PCA.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="354">
+                  <caret line="107" column="39" lean-forward="false" selection-start-line="107" selection-start-column="39" selection-end-line="107" selection-end-column="39" />
+                  <folding>
+                    <element signature="e#0#18#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="asgn1.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/asgn1.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="661">
+                  <caret line="138" column="12" lean-forward="false" selection-start-line="111" selection-start-column="2" selection-end-line="138" selection-end-column="12" />
+                  <folding>
+                    <element signature="e#0#45#0" expanded="true" />
+                    <element signature="e#1557#1647#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -60,6 +69,7 @@
       <find>power_iteration</find>
       <find>power</find>
       <find>computePCA</find>
+      <find>self.m</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -83,16 +93,16 @@
         <option value="$PROJECT_DIR$/MYPCA.py" />
         <option value="$PROJECT_DIR$/asgn1_lib.py" />
         <option value="$PROJECT_DIR$/playground.py" />
-        <option value="$PROJECT_DIR$/asgn1.py" />
         <option value="$PROJECT_DIR$/Online_PCA.py" />
+        <option value="$PROJECT_DIR$/asgn1.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="634" />
-    <option name="y" value="113" />
-    <option name="width" value="812" />
-    <option name="height" value="733" />
+    <option name="x" value="446" />
+    <option name="y" value="23" />
+    <option name="width" value="994" />
+    <option name="height" value="824" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -330,7 +340,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="634" y="113" width="812" height="733" extended-state="0" />
+    <frame x="446" y="23" width="994" height="824" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3055286" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -339,7 +349,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329235" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35579938" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31138545" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -636,8 +646,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Online_PCA.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="108" selection-end-column="30" />
+        <state relative-caret-position="354">
+          <caret line="107" column="39" lean-forward="false" selection-start-line="107" selection-start-column="39" selection-end-line="107" selection-end-column="39" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -646,10 +656,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/asgn1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="97" column="58" lean-forward="true" selection-start-line="96" selection-start-column="4" selection-end-line="97" selection-end-column="58" />
+        <state relative-caret-position="661">
+          <caret line="138" column="12" lean-forward="false" selection-start-line="111" selection-start-column="2" selection-end-line="138" selection-end-column="12" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#1557#1647#0" expanded="false" />
           </folding>
         </state>
       </provider>
