@@ -69,19 +69,62 @@ initialR = onlinePCA.initialR.copy()
 
 e0, ev0 = onlinePCA.onlinePowerPCA(n_pcs=1)
 
-# 3 outlier detection
+# outlier detection
 inlier = []
 outlier = []
 corrs = []
 index = []
+my_labels = []
+
+# if the corr > threshold, it will be classified as positive
+threshold = 0.5
 
 for i in range(total_X.shape[0]):
     # reset the R to initial R
     onlinePCA.initialR = initialR.copy()
-    onlinePCA.updateCov(x=total_X[i], gamma=0.01)
+    onlinePCA.updateCov(x=total_X[i], gamma=0.05)
     cov = onlinePCA.computeCorr(w0=e0)
+    if cov < threshold:
+        my_labels.append('y')
+    else:
+        my_labels.append('n')
     corrs.append(cov)
     index.append(i)
 
 plt.plot(index, corrs)
-plt.show()
+# plt.show()
+
+
+# TPR = TP/(TP+FN)
+def computeTPR(total_y, my_labels):
+    tp = 0
+    fn = 0
+
+    for i in range(total_y.shape[0]):
+        if total_y[i] == 0:
+            if my_labels[i] == 'y':
+                tp += 1
+                print "y"
+            elif my_labels[i] == 'n':
+                print "n"
+                fn += 1
+
+    return tp * 1.0 / (tp + fn) * 1.0
+
+
+# FPR = FP / (FP + TN)
+def computeFPR(total_y, my_labels):
+    fp = 0
+    tn = 0
+
+    for i in range(total_y.shape[0]):
+        if total_y[i] != 0:
+            if my_labels[i] == 'y':
+                fp += 1
+            elif my_labels[i] == 'n':
+                tn += 1
+    return fp * 1.0 / (fp + tn) * 1.0
+
+
+print computeFPR(total_y=total_y, my_labels=my_labels)
+print computeTPR(total_y=total_y, my_labels=my_labels)
