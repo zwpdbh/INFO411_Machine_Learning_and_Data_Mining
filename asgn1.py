@@ -94,17 +94,21 @@ onlinePCA = OnlinePCA(X=total_X[:100])
 covariances = []
 index = []
 for i in range(101, total_X.shape[0]):
-    cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[i])
+    onlinePCA.updateCov(total_X[i])
+    cov = onlinePCA.compareWithCurrentEigenvector(w0=w0.T)
     covariances.append(cov)
     index.append(i)
 
 plt.plot(index, covariances)
 plt.show()
-cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[101])
+# cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[101])
+
+
 
 # '''
 # 1. randomly extract 100 data instances that belong to "0" class, use it to initialize PCA
 # '''
+
 # datasets_zero = []
 # for i in range(total_y.shape[0]):
 #     if total_y[i] == 0:
@@ -114,7 +118,7 @@ cov = onlinePCA.comparisionBetweenTwoEigenvector(w0=w0.T, w=total_X[101])
 # np.random.shuffle(datasets_zero)
 #
 # onlinePCA = OnlinePCA(X=datasets_zero[:100])
-# W0, ev0 = onlinePCA.computePCA(n_pcs=2)
+# e0, ev0 = onlinePCA.computePCA(n_pcs=1)
 #
-# for i in range(1):
-#     print "s"
+# e0 = np.squeeze(np.asarray(e0))
+

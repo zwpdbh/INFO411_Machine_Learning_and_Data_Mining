@@ -95,17 +95,16 @@ class OnlinePCA:
         return W, ev
 
     # w0 is the batch mode eigenvector
-    def comparisionBetweenTwoEigenvector(self, w0, w, gamma=None):
-        self.updateCov(w, gamma)
+    def compareWithCurrentEigenvector(self, w0):
         # compute the first eigenvector, based on the current updated covariance matrix
-        W, ev = self.computePCA(n_pcs=1)
-        w = np.squeeze(np.asarray(W))
-        print w.shape
+        e1, ev = self.computePCA(n_pcs=1)
 
+        e1 = np.squeeze(np.asarray(e1))
         w0 = np.squeeze(np.asarray(w0))
+        mean_e1 = np.mean(e1)
         mean_w0 = np.mean(w0)
-        mean_w = np.mean(w)
         s = 0
-        for i in range(w.shape[0]):
-            s += (w[i] - mean_w) * (w0[i] - mean_w0)
-        return s / w.shape[0]
+        for i in range(w0.shape[0]):
+            s += (e1[i] - mean_e1) * (w0[i] - mean_w0)
+        return s / w0.shape[0]
+
