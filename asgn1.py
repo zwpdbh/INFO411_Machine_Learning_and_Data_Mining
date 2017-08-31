@@ -63,32 +63,25 @@ for i in range(total_y.shape[0]):
 datasets_zero = np.matrix(datasets_zero)
 np.random.shuffle(datasets_zero)
 
-# 2 construct the initial R matrix
+# 2 construct the initial R matrix, get the first eigenvector from the 100 "0"'s samples
 onlinePCA = OnlinePCA(X=datasets_zero[:100])
 initialR = onlinePCA.initialR.copy()
 
 e0, ev0 = onlinePCA.onlinePowerPCA(n_pcs=1)
-# e0 = np.squeeze(np.asarray(e0))
 
-print "e0= ", e0
+# 3 outlier detection
+inlier = []
+outlier = []
+corrs = []
+index = []
 
-w0, ev = OnlinePCA.powerPCA(datasets_zero[:100], n_pcs=1)
-print "w= ", w0
+for i in range(total_X.shape[0]):
+    # reset the R to initial R
+    onlinePCA.initialR = initialR.copy()
+    onlinePCA.updateCov(x=total_X[i], gamma=0.01)
+    cov = onlinePCA.computeCorr(w0=e0)
+    corrs.append(cov)
+    index.append(i)
 
-result = onlinePCA.computeCorr(w0 = w0)
-print result
-
-# inlier = []
-# outlier = []
-#
-# covs = []
-# index = []
-# for i in range(total_X.shape[0]):
-#     index.append(i)
-#     onlinePCA.initialR = initialR.copy()
-#     onlinePCA.updateCov(x=total_X[i], gamma=0.05)
-#     cov = onlinePCA.compareWithCurrentEigenvector(e0)
-#     covs.append(cov)
-#
-# plt.plot(index, covs)
-# plt.show()
+plt.plot(index, corrs)
+plt.show()

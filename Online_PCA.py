@@ -120,5 +120,5 @@ class OnlinePCA:
         s = 0
         for i in range(w0.shape[0]):
             s += (e1[i] - mean_e1) * (w0[i] - mean_w0)
-        return s / 64
+        return s
 
