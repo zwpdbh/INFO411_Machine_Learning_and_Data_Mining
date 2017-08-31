@@ -2,25 +2,6 @@ import numpy as np
 import matplotlib.pylab as plt
 import numpy.linalg as LA
 
-'''
-The powerPCA method given about carries out PCA ina batch mode. It needs to gather all data
-to compute the covariance matrix R, and then the power iterations follow
-(along with the deflation of R for each eigenvector obtained).
-
-For online PCA:
-First, use a mini-batch, say the first 100 rows of X to obtain the mean vector m, and the covariance matrix R 
-in the same way as in the powerPCA() method.
-
-1. use the next row of X as input x, and update the online average m.
-2. use x to update R (as an online average of x.T * x)
-3. write an onlinePowerPCA(R) method that derives the eigenvectors and eigenvalues of the current R.
-4. Repeat the above process until all entries of X are handled.
-
-Following the idea we introduce in online clustering, we can use the exponential weighting to produce
-the online average, e.g
-m <= r * m + (1 - r)x
-where r is a weighting coefficient, 0 < r << 1. The same idea works for updating R as Well.
-'''
 
 class OnlinePCA:
     def __init__(self, X):
@@ -105,7 +86,7 @@ class OnlinePCA:
         x = np.matrix(x)
         if gamma==None:
             gamma = (1.0 / self.n)
-        # self.m = self.m + gamma * (x - self.m)
+        self.m = self.m + gamma * (x - self.m)
         self.R = self.R + gamma * (x.T * x - self.R)
 
     # compute the eigenvectors and eigenvalues based on the current covariance matrix stored as self.R
@@ -127,8 +108,8 @@ class OnlinePCA:
         ev = LA.norm(y, axis=0) / LA.norm(W, axis=0)
         return W, ev
 
-    # w0 is the batch mode eigenvector
-    def compareWithCurrentEigenvector(self, w0):
+    # compute the correlation between current first eigenvector with w0
+    def computeCorr(self, w0):
         # compute the first eigenvector, based on the current updated covariance matrix
         e1, ev = self.onlinePowerPCA(n_pcs=1)
 
@@ -139,5 +120,5 @@ class OnlinePCA:
         s = 0
         for i in range(w0.shape[0]):
             s += (e1[i] - mean_e1) * (w0[i] - mean_w0)
-        return s
+        return s / 64
 
