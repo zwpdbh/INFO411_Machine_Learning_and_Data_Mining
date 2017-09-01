@@ -6,12 +6,14 @@ import numpy.linalg as LA
 class OnlinePCA:
     def __init__(self, X):
         self.X = np.matrix(X)
-        self.m = np.mean(X, axis=0)
-        self.X = self.X - self.m
-        self.R = self.X.T * self.X / (self.X.shape[0] - 1.0)
         self.dim = self.X.shape[1]
         self.n = self.X.shape[0]
+        self.m = np.mean(X, axis=0)
+#         self.X = self.X - self.m
+#         self.R = self.X.T * self.X / (self.X.shape[0] - 1.0)
+        self.R = (self.X - self.m).T * (self.X - self.m) / (self.n - 1.0)
         self.initialR = self.R.copy()
+        self.Q = self.X.T * self.X / (self.n * 1.0)
 
     @staticmethod
     def converged(w, w1, thres=1e-10):
@@ -86,8 +88,14 @@ class OnlinePCA:
         x = np.matrix(x)
         if gamma==None:
             gamma = (1.0 / self.n)
-        self.m = self.m + gamma * (x - self.m)
+        self.m = gamma * self.m + (1 - gamma) * x
         self.R = self.R + gamma * (x.T * x - self.R)
+        # self.R = self.Q / (1 + gamma) + (x.T * x) * gamma - (self.m.T * self.m)
+        # self.R = self.R + (x.T * x) * gamma - (self.m.T * self.m)
+
+        # self.R = self.Q / (1 + gamma) + (x.T * x) * gamma / (1 + gamma) - (self.m.T * self.m)
+        # print self.Q.shape, self.R.shape,  (x.T * x).shape, (self.m.T * self.m).shape
+        print self.m.shape, x.shape
 
     # compute the eigenvectors and eigenvalues based on the current covariance matrix stored as self.R
     def onlinePowerPCA(self, n_pcs):
@@ -110,7 +118,7 @@ class OnlinePCA:
 
     # compute the correlation between current first eigenvector with w0
     def computeCorr(self, w0):
-        # compute the first eigenvector, based on the current updated covariance matrix
+        # compute the first eigenvector, based on the current covariance matrix
         e1, ev = self.onlinePowerPCA(n_pcs=1)
 
         e1 = np.squeeze(np.asarray(e1))
