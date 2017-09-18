@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e2f9305-ee4c-41ae-bfcb-2d684866ca4d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/KMeans.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assignment_2/OtherGMeans.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyLib.py" afterPath="$PROJECT_DIR$/MyLib.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/playground.py" afterPath="$PROJECT_DIR$/playground.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/GMeans.py" afterPath="$PROJECT_DIR$/assignment_2/GMeans.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/KMeans.py" afterPath="$PROJECT_DIR$/assignment_2/KMeans.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +22,8 @@
       <file leaf-file-name="GMeans.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state relative-caret-position="552">
+              <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -34,10 +34,11 @@
       <file leaf-file-name="KMeans.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assignment_2/KMeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
+            <state relative-caret-position="265">
               <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+                <marker date="1505721771000" expanded="true" signature="337:1035" ph="..." />
               </folding>
             </state>
           </provider>
@@ -46,8 +47,8 @@
       <file leaf-file-name="Tools.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+            <state relative-caret-position="160">
+              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -70,7 +71,6 @@
       <find>getCentroids</find>
       <find>self.nr</find>
       <find>hstack</find>
-      <find>print</find>
       <find>power_iteration</find>
       <find>power</find>
       <find>computePCA</find>
@@ -84,6 +84,7 @@
       <find>_</find>
       <find>_[</find>
       <find>computeKMeans</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -116,16 +117,16 @@
         <option value="$PROJECT_DIR$/assignment_2/playground.py" />
         <option value="$PROJECT_DIR$/assignment_2/OtherGMeans.py" />
         <option value="$PROJECT_DIR$/assignment_2/Mylib.py" />
-        <option value="$PROJECT_DIR$/assignment_2/KMeans.py" />
         <option value="$PROJECT_DIR$/assignment_2/Tools.py" />
+        <option value="$PROJECT_DIR$/assignment_2/KMeans.py" />
         <option value="$PROJECT_DIR$/assignment_2/GMeans.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="464" />
+    <option name="x" value="571" />
     <option name="y" value="23" />
-    <option name="width" value="976" />
+    <option name="width" value="903" />
     <option name="height" value="824" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -423,7 +424,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="464" y="23" width="976" height="824" extended-state="0" />
+    <frame x="571" y="23" width="903" height="824" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -433,7 +434,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23731138" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23554604" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3472706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -711,30 +712,29 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/playground.py" />
-    <entry file="file://$PROJECT_DIR$/assignment_2/OtherGMeans.py">
+    <entry file="file://$PROJECT_DIR$/assignment_2/KMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1920">
-          <caret line="120" column="47" lean-forward="true" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
+        <state relative-caret-position="265">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <marker date="1505721771000" expanded="true" signature="337:1035" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assignment_2/KMeans.py">
+    <entry file="file://$PROJECT_DIR$/assignment_2/OtherGMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="496">
+          <caret line="120" column="47" lean-forward="true" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        <state relative-caret-position="160">
+          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -743,8 +743,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        <state relative-caret-position="552">
+          <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
