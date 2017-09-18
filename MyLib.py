@@ -7,51 +7,59 @@ class MyLib:
 
     # from lab5, C is the penalty value, h is the mesh size
     @staticmethod
-    def compute_and_compare_SVM(X, y, C, h):
+    def compute_and_compare_SVM(X, y, C, h=-1):
         svc = svm.SVC(kernel='linear', C=C).fit(X=X, y=y)
         rbf_svc = svm.SVC(kernel='rbf', gamma=0.7, C=C).fit(X, y)
         poly_svc = svm.SVC(kernel='poly', degree=3, C=C).fit(X, y)
         lin_svc = svm.LinearSVC(C=C).fit(X, y)
 
         # check on performance
-        print 'SVC:', svc.score(X, y)
-        print 'RBF_SVC:', rbf_svc.score(X, y)
-        print 'Poly_SVC:', poly_svc.score(X, y)
-        print 'Linear_SVC:', lin_svc.score(X, y)
+        svc_score = svc.score(X, y)
+        RBF_SVC_score = rbf_svc.score(X, y)
+        Poly_SVC_score = poly_svc.score(X, y)
+        Linear_SVC_score = lin_svc.score(X, y)
 
-        # create a mesh to plot in
-        x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-        y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-        xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                             np.arange(y_min, y_max, h))
+        if h > 0:
+            print 'SVC:', svc_score
+            print 'RBF_SVC:', RBF_SVC_score
+            print 'Poly_SVC:', Poly_SVC_score
+            print 'Linear_SVC:', Linear_SVC_score
 
-        # title for the plots
-        titles = ['SVC with linear kernel',
-                  'LinearSVC (linear kernel)',
-                  'SVC with RBF kernel',
-                  'SVC with polynomial (degree 3) kernel']
+            # create a mesh to plot in
+            x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+            y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+            xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                                 np.arange(y_min, y_max, h))
 
-        for i, clf in enumerate((svc, lin_svc, rbf_svc, poly_svc)):
-            # Plot the decision boundary. For that, we will assign a color to each
-            # point in the mesh [x_min, m_max]x[y_min, y_max].
-            plt.subplot(2, 2, i + 1)
-            plt.subplots_adjust(wspace=0.4, hspace=0.4)
+            # title for the plots
+            titles = ['SVC with linear kernel',
+                      'LinearSVC (linear kernel)',
+                      'SVC with RBF kernel',
+                      'SVC with polynomial (degree 3) kernel']
 
-            Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+            for i, clf in enumerate((svc, lin_svc, rbf_svc, poly_svc)):
+                # Plot the decision boundary. For that, we will assign a color to each
+                # point in the mesh [x_min, m_max]x[y_min, y_max].
+                plt.subplot(2, 2, i + 1)
+                plt.subplots_adjust(wspace=0.4, hspace=0.4)
 
-            # Put the result into a color plot
-            Z = Z.reshape(xx.shape)
-            plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, alpha=0.8)
+                Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
 
-            # Plot also the training points
-            plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired)
-            plt.xlabel('Sepal length')
-            plt.ylabel('Sepal width')
-            plt.xlim(xx.min(), xx.max())
-            plt.ylim(yy.min(), yy.max())
-            plt.xticks(())
-            plt.yticks(())
-            plt.title(titles[i])
+                # Put the result into a color plot
+                Z = Z.reshape(xx.shape)
+                plt.contourf(xx, yy, Z, cmap=plt.cm.Paired, alpha=0.8)
+
+                # Plot also the training points
+                plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Paired)
+                plt.xlabel('Sepal length')
+                plt.ylabel('Sepal width')
+                plt.xlim(xx.min(), xx.max())
+                plt.ylim(yy.min(), yy.max())
+                plt.xticks(())
+                plt.yticks(())
+                plt.title(titles[i])
+        elif h < 0:
+            return (svc_score, RBF_SVC_score, Poly_SVC_score, Linear_SVC_score)
 
     # from lab5, comparing the svm result for with and without weight
     @staticmethod
@@ -84,13 +92,32 @@ class MyLib:
         plt.axis('tight')
 
 
+    #
+    # @staticmethod
+    # def compute_TP_TN_FP_FN(samples, results, positive):
+    #     tp, tn, fp, fn = 0, 0, 0, 0
+    #
+    #     for i in range(samples.shape[0]):
+    #         if results[i] == positive and samples[i] == positive:
+    #             tp += 1
+    #         elif results[i] != positive and samples[i] != positive:
+    #             tn += 1
+    #         elif results[i] == positive and samples[i] != positive:
+    #             fp += 1
+    #         elif results[i] != positive and samples[i] == positive:
+    #             fn += 1
+    #
+    #     return tp, tn, fp, fn
+
+
     @staticmethod
     def svm_novelty_detection(xx, yy, X_train, X_test, X_outliers, gamma=0.1, plot_graph=True):
         clf = svm.OneClassSVM(nu=0.1, kernel="rbf", gamma=0.1)
         clf.fit(X_train)
 
-        TP = []
-        FP = []
+        tp_train, tn_train, fp_train, fn_train = 0, 0, 0, 0
+        tp_test, tn_test, fp_test, fn_test = 0, 0, 0, 0
+        tp_outlier, tn_outlier, fp_outlier, fn_outlier = 0, 0, 0, 0
 
         y_pred_train = clf.predict(X_train)
         y_pred_test = clf.predict(X_test)
@@ -99,6 +126,17 @@ class MyLib:
         n_error_train = y_pred_train[y_pred_train == -1].size
         n_error_test = y_pred_test[y_pred_test == -1].size
         n_error_outliers = y_pred_outliers[y_pred_outliers == 1].size
+
+        # True Positives
+        tp_train = y_pred_train[y_pred_train == 1].size
+        tp_test = y_pred_test[y_pred_test == 1].size
+        tp_outlier = y_pred_outliers[y_pred_outliers == -1].size
+
+        # False Positives.
+        fp_train = n_error_train
+        fp_test = n_error_test
+        fp_outlier = n_error_outliers
+
 
         if plot_graph:
             # plot the line, the points, and the nearest vectors to the plane
@@ -128,3 +166,20 @@ class MyLib:
                 "error train: %d/200 ; errors novel regular: %d/40 ; "
                 "errors novel abnormal: %d/40"
                 % (n_error_train, n_error_test, n_error_outliers))
+
+    # Given dataSet and k, initialize and return k centroids for further clustering
+    @staticmethod
+    def randomInitializeData(dataSet, k):
+        nrow, dim = dataSet.shape
+        centroids = np.zeros((k, dim))
+        for i in range(k):
+            centroids[i] = dataSet[np.random.randint(nrow)].copy()
+
+        return centroids
+
+    @staticmethod
+    def drawnCentroids(dataSet, centroids):
+        plt.plot(dataSet[:, 0], dataSet[:, 1], 'g+')
+        for centroid in centroids:
+            plt.plot(centroid, 'ro')
+        # plt.plot(centroids[:, 0, centroids[:, 1], 'ro'])
