@@ -36,6 +36,7 @@ class KMeans:
             else:
                 self.cluster_1.append(dataSet[index])
             index += 1
+
         self.cluster_0 = np.array(self.cluster_0)
         self.cluster_1 = np.array(self.cluster_1)
 
