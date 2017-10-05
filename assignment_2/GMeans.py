@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageOps
 from sklearn import datasets
 import matplotlib.pyplot as pl
 from scipy.misc import imsave
-from XMeans import XMeans
+from J_XMeans import XMeans
 
 class GMeans:
     def __init__(self, strictLevel):
@@ -53,15 +53,15 @@ class GMeans:
 
 
 if __name__ == '__main__':
-
+    pass
     # # demo one:
-    dataSet1 = np.random.randn(100, 2)+2
-    dataSet2 = np.random.randn(100, 2)+5
+    # dataSet1 = np.random.randn(100, 2)+2
+    # dataSet2 = np.random.randn(100, 2)+5
     # dataSet3 = np.random.randn(400, 2)-2
     # # dataSet4 = np.random.randn(50, 2)-5
     # dataSet5 = np.random.randn(20, 2)-10
     #
-    total_dataSet = np.vstack((dataSet1, dataSet2))
+    # total_dataSet = np.vstack((dataSet1, dataSet2))
     # total_dataSet = np.vstack((total_dataSet, dataSet3))
     # # total_dataSet = np.vstack((total_dataSet, dataSet4))
     # total_dataSet = np.vstack((total_dataSet, dataSet5))
@@ -77,33 +77,4 @@ if __name__ == '__main__':
     # tl.drawCentroids(gM.centroids)
     # plt.show()
 
-    imageString = "/Users/zw/code/INFO411_Machine_Learning_and_Data_Mining/snapshot_of_dilate_mask.png"
-    imageString_1 = "/Users/zw/code/INFO411_Machine_Learning_and_Data_Mining/snapshot.png"
-    img = Image.open(imageString)
 
-
-    # exchange image white to black, black to white
-    binary_img_narry = tl.exchange_binary_image_white_black(img)
-    print len(binary_img_narry)
-
-    moving_object_data_set = []
-    for i in range(len(binary_img_narry)):
-        for j in range( len(binary_img_narry[0])):
-            if binary_img_narry[i][j] == 0:
-                moving_object_data_set.append([j, i])
-
-
-    image_data_set = np.asarray(moving_object_data_set)
-    print image_data_set.shape
-
-    gM = GMeans(strictLevel=4)
-    gM.fit(image_data_set)
-    print "found {} clusters".format(len(gM.centroids))
-
-    x_means = XMeans(random_state=1).fit(image_data_set)
-    print len(x_means.cluster_centers_)
-
-    # tl.drawDataSet(total_dataSet, 'g+')
-    tl.drawDataSet(image_data_set, 'g+')
-    tl.drawCentroids(gM.centroids)
-    plt.show()
