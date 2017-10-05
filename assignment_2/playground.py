@@ -1,127 +1,159 @@
-from GMeans import GMeans
-from XMeans import XMeans
 from PIL import Image, ImageDraw, ImageOps
-from Tools import Tools as tl
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as pl
 import numpy as np
-import time
+from sklearn.cluster import KMeans
+from sklearn import metrics
+from scipy.stats import anderson
 
-imageString = "/Users/zw/code/INFO411_Machine_Learning_and_Data_Mining/snapshot_of_dilate_mask.png"
-imageString_1 = "/Users/zw/code/INFO411_Machine_Learning_and_Data_Mining/snapshot.png"
-img = Image.open(imageString)
+img = Image.open("assignment_2/africa.jpg")
+pix=np.array(img)[:,:,0:3]
 
+# pix is numpy.ndarray, (150000, 3)
+pix = pix.reshape((-1, 3)).astype(float)
 
-# exchange image white to black, black to white
-binary_img_narry = tl.exchange_binary_image_white_black(img)
-moving_object_data_set = []
-
-for x in range(len(binary_img_narry[0])):
-    for y in range(len(binary_img_narry)):
-        if binary_img_narry[y][x] == 0:
-            moving_object_data_set.append([x, y])
-
-image_data_set = np.asarray(moving_object_data_set)
+# km = KMeans(init='k-means++', n_clusters=5).fit(pix)
+# print km.cluster_centers_
 
 
-# Use G-means to do clustering
-# gM = GMeans(strictLevel=4)
-# gM.fit(image_data_set)
-# print "found {} clusters".format(len(gM.centroids))
-#
-# tl.drawDataSet(image_data_set, 'g+')
-# tl.drawCentroids(gM.centroids)
-# plt.show()
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+import seaborn as sbn
+
+from sklearn.cluster import MiniBatchKMeans
+from sklearn.preprocessing import scale
+
+from sklearn import datasets
+
+from scipy.stats import anderson
+
+from pdb import set_trace
 
 
-# Use X-means to do clustering
-# x_means = XMeans()
-# x_means.fit(image_data_set)
-# print x_means.cluster_centers
-# tl.drawCentroids(x_means.cluster_centers_)
-# plt.show()
+class GMeans(object):
+    """strictness = how strict should the anderson-darling test for normality be
+            0: not at all strict
+            4: very strict
+    """
+
+    def __init__(self, min_obs=1, max_depth=10, random_state=None, strictness=4):
+
+        super(GMeans, self).__init__()
+
+        self.max_depth = max_depth
+
+        self.min_obs = min_obs
+
+        self.random_state = random_state
+
+        if strictness not in range(5):
+            raise ValueError("strictness parameter must be integer from 0 to 4")
+        self.strictness = strictness
+
+        self.stopping_criteria = []
+
+    def _gaussianCheck(self, vector):
+        """
+        check whether a given input vector follows a gaussian distribution
+        H0: vector is distributed gaussian
+        H1: vector is not distributed gaussian
+        """
+        output = anderson(vector)
+
+        if output[0] <= output[1][self.strictness]:
+            return True
+        else:
+            return False
+
+    def _recursiveClustering(self, data, depth, index):
+        """
+        recursively run kmeans with k=2 on your data until a max_depth is reached or we have
+            gaussian clusters
+        """
+        depth += 1
+        if depth == self.max_depth:
+            self.data_index[index[:, 0]] = index
+            self.stopping_criteria.append('max_depth')
+            return
+
+        km = MiniBatchKMeans(n_clusters=2, random_state=self.random_state)
+        km.fit(data)
+
+        centers = km.cluster_centers_
+        v = centers[0] - centers[1]
+        x_prime = scale(data.dot(v) / (v.dot(v)))
+        gaussian = self._gaussianCheck(x_prime)
+
+        # print gaussian
+
+        if gaussian == True:
+            self.data_index[index[:, 0]] = index
+            self.stopping_criteria.append('gaussian')
+            return
+
+        labels = set(km.labels_)
+        for k in labels:
+            current_data = data[km.labels_ == k]
+
+            if current_data.shape[0] <= self.min_obs:
+                self.data_index[index[:, 0]] = index
+                self.stopping_criteria.append('min_obs')
+                return
+
+            current_index = index[km.labels_ == k]
+            current_index[:, 1] = np.random.randint(0, 100000000000)
+            self._recursiveClustering(data=current_data, depth=depth, index=current_index)
+
+            # set_trace()
+
+    def fit(self, data):
+        """
+        fit the recursive clustering model to the data
+        """
+        self.data = data
+
+        data_index = np.array([(i, False) for i in xrange(data.shape[0])])
+        self.data_index = data_index
+
+        self._recursiveClustering(data=data, depth=0, index=data_index)
+
+        self.labels_ = self.data_index[:, 1]
 
 
+if __name__ == '__main__':
+    # iris = datasets.load_iris().data
 
-N = 10
+    iris = datasets.make_blobs(n_samples=10000,
+                               n_features=2,
+                               centers=4,
+                               cluster_std=1.0)[0]
 
-def test_1(visualize = False):
-    x = np.array([np.random.normal(loc, 0.1, 20) for loc in np.repeat([1,2], 2)]).flatten()
-    y = np.array([np.random.normal(loc, 0.1, 20) for loc in np.tile([1,2], 2)]).flatten()
-    st = time.time()
+    gmeans = GMeans(random_state=1010,
+                    strictness=4)
 
-    # print "x = ", x
-    # print "y = ", y
-    print "data set = ", np.c_[x, y]
+    img = Image.open("africa.jpg")
+    img = ImageOps.fit(img, (200, 100), Image.ANTIALIAS)
 
-    x_means = XMeans(k_init=2).fit(np.c_[x, y])
-    et = time.time() - st
+    # img.show()
 
-    if visualize:
-        print(x_means.labels_)
-        print(x_means.cluster_centers_)
+    pix = np.array(img)[:, :, 0:3]
+    pix = pix.reshape((-1, 3)).astype(float)
 
-        colors = ["g", "b", "c", "m", "y", "b", "w"]
-        for label in range(x_means.labels_.max()+1):
-            plt.scatter(x[x_means.labels_ == label], y[x_means.labels_ == label], c = colors[label], label = "sample", s = 30)
-        plt.scatter(x_means.cluster_centers_[:,0], x_means.cluster_centers_[:,1], c = "r", marker = "+", label = "center", s = 100)
-        plt.xlim(0, 3)
-        plt.ylim(0, 3)
-        plt.title("x-means_test")
-        plt.legend()
-        plt.grid()
-        plt.show()
+    gmeans.fit(pix)
 
-    return et
+    # # set_trace()
+    # gmeans.fit(iris)
 
-def test_on_image(imageString):
-    img = Image.open(imageString)
-
-    # exchange image white to black, black to white
-    binary_img_narry = tl.exchange_binary_image_white_black(img)
-    moving_object_data_set = []
-
-    for x in range(len(binary_img_narry[0])):
-        for y in range(len(binary_img_narry)):
-            if binary_img_narry[y][x] == 0:
-                moving_object_data_set.append([y*1.0, x*1.0])
-
-    image_data_set = np.asarray(moving_object_data_set)
-    image_data_set = image_data_set[:3000:]
-    st = time.time()
-    x = image_data_set[:, 0]
-    y = image_data_set[:, 1]
-
-    print "data set = ", np.c_[x, y]
-
-    x_means = XMeans(k_init=2).fit(np.c_[x, y])
-    et = time.time() - st
-
-    print(x_means.labels_)
-    print(x_means.cluster_centers_)
-
-    colors = ["g", "b", "c", "m", "y", "b", "w"]
-    # for label in range(x_means.labels_.max() + 1):
-        # plt.scatter(x[x_means.labels_ == label], y[x_means.labels_ == label], c=colors[label], label="sample")
-    tl.drawDataSet(image_data_set, 'g+')
-    plt.scatter(x_means.cluster_centers_[:, 0], x_means.cluster_centers_[:, 1], c="r", marker="+", label="center",
-                s=100)
-    print "find {} number of clusters".format(x_means.cluster_centers_)
-    # plt.xlim(0, 3)
-    # plt.ylim(0, 3)
-    plt.title("x-means_test")
-    plt.legend()
-    plt.grid()
-    plt.show()
-    return et
-
-
-
-# test_1(True)
-test_on_image(imageString=imageString)
-
-
-# test = np.array([[1, 2], [3, 4], [5, 6]])
-# print test
-#
-# print test[:, 0]
-# print test[:, 1]
+    # plot_data = pd.DataFrame(iris[:, 0:2])
+    # plot_data.columns = ['x', 'y']
+    # plot_data['labels_gmeans'] = gmeans.labels_
+    # # set_trace()
+    #
+    # km = MiniBatchKMeans(n_clusters=4)
+    # km.fit(iris)
+    # plot_data['labels_km'] = km.labels_
+    #
+    # sbn.lmplot(x='x', y='y', data=plot_data, hue='labels_gmeans', fit_reg=False)
+    # sbn.lmplot(x='x', y='y', data=plot_data, hue='labels_km', fit_reg=False)
+    # plt.show()
+    # set_trace()
