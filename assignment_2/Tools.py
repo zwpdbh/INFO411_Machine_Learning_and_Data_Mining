@@ -1,14 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.cm as cm
+from random import randint
 
 class Tools:
     @staticmethod
     def drawCentroids(centroids='ro'):
         plt.plot(centroids[:, 0], centroids[:, 1], 'ro')
-
-    @staticmethod
-    def drawCentroid(centroid, symbol='ro'):
-        plt.plot(centroid[0], centroid[1], symbol)
 
     @staticmethod
     def drawDataSet(X, symbol):
@@ -42,13 +40,24 @@ class Tools:
         return pixels
 
 
-    # @staticmethod
-    # def get_clustering_pixel_position_from_image(img):
-    #     img = img.convert('L')
-    #     pixels = np.array(img)
-    #     threshold = 100
-    #
-    #     for i in range(len(pixels)):
-    #         for j in range(len(pixels[0])):
-    #             if pixels[i][j]
-    #             pass
+    @staticmethod
+    def drawClusters(clusters):
+        X = [1, 2, 3, 4]
+        Ys = np.array([[4, 8, 12, 16],
+                       [1, 4, 9, 16],
+                       [17, 10, 13, 18],
+                       [9, 10, 18, 11],
+                       [4, 15, 17, 6],
+                       [7, 10, 8, 7],
+                       [9, 0, 10, 11],
+                       [14, 1, 15, 5],
+                       [8, 15, 9, 14],
+                       [20, 7, 1, 5]])
+
+        colors = cm.rainbow(np.linspace(0, 1, len(Ys)))
+
+        for label in range(len(clusters)):
+            for each in clusters[label]:
+                plt.scatter(each[0], each[1], s=1, c=colors[label % len(colors)])
+
+
