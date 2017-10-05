@@ -39,8 +39,18 @@ class GMeans:
 
         km = self.KMeans().split(dataSet=X)
         v = km.c_0 - km.c_1
+        # normalize v, need?
+        v = v / np.sqrt(v.T * v)
 
-        X_prime = scale(X.dot(v) / (v.dot(v)))
+        # X_prime = scale(X.dot(v) / (v.dot(v)))
+
+        v = v.reshape((len(v), 1))
+        v = np.asmatrix(v)
+        # print X.shape, type(X)
+        # print v.shape, type(v)
+        X_prime = X * v
+
+        print X_prime.shape
         # use X * e, matrix multiple to map the X into one dimension
         # currently, v = [float, float, float], we need to convert it into
         # the eigen vector form [matrix, matrix, matrix]
@@ -132,7 +142,7 @@ def demo1():
     # demo one:
     dataSet1 = np.random.randn(100, 2) + 2
     dataSet2 = np.random.randn(100, 2) + 5
-    dataSet3 = np.random.randn(400, 2) - 2
+    dataSet3 = np.random.randn(200, 2) - 2
     dataSet4 = np.random.randn(50, 2)-5
     dataSet5 = np.random.randn(20, 2) - 10
 
@@ -152,26 +162,32 @@ def demo1():
     Tools.drawCentroids(gM.centroids)
     Tools.drawClusters(gM.clusters)
 
-if __name__ == '__main__':
+def demo2():
     img = Image.open("africa.jpg")
     img = ImageOps.fit(img, (200, 100), Image.ANTIALIAS)
 
-    # img.show()
+    img.show()
 
-    # pix = np.array(img)[:, :, 0:3]
-    # pix = pix.reshape((-1, 3)).astype(float)
+    pix = np.array(img)[:, :, 0:3]
+    pix = pix.reshape((-1, 3)).astype(float)
 
-    # gm = GMeans().fit(pix)
-    # print len(gm.centroids)
+    gm = GMeans().fit(pix)
+    print len(gm.centroids)
 
-    # pix_prime = gm.get_X_prime(pix)
-    # print "begin computing the anderson statistics:"
-    # print "data size is {}".format(pix_prime.shape)
-    # output = anderson(pix_prime)
-    # print "the anderson statistics is \n{}".format(output[0])
-    # print "cricital value = {}".format(output[1])
+    pix_prime = gm.get_X_prime(pix)
+    print "begin computing the anderson statistics:"
+    print "data size is {}".format(pix_prime.shape)
+    output = anderson(pix_prime)
+    print "the anderson statistics is \n{}".format(output[0])
+    print "cricital value = {}".format(output[1])
 
-    demo1()
+if __name__ == '__main__':
+
+
+    # demo1()
+
+    demo2()
+
     pl.show()
 
 
