@@ -140,6 +140,8 @@ class GMeans:
             self.c_1 = None
 
         def split(self, dataSet, index_records):
+            print "\nindex_records length = {}".format(len(index_records))
+            print "index_records = {}".format(index_records)
             kM = KMeans(init='k-means++', n_clusters=2).fit(dataSet[index_records])
 
             self.c_0 = kM.cluster_centers_[0]
@@ -222,7 +224,12 @@ def demo_XMean():
 
 if __name__ == '__main__':
 
-    X, y = datasets.make_blobs(n_samples=100, centers=2, n_features=2, random_state=0)
+    random_state = 0
+
+    # Anisotropicly distributed data
+    X, y = datasets.make_blobs(n_samples=1000, centers=7, n_features=2, random_state=random_state)
+    # transformation = [[0.6, -0.6], [-0.4, 0.8]]
+    # X = np.dot(X, transformation)
 
     gm = GMeans().fit(X)
     Tools.draw(X=X, lables=gm.labels, centroids=gm.centroids, title="G-Mean")
