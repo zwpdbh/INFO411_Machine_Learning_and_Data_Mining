@@ -142,7 +142,7 @@ class GMeans:
         def split(self, dataSet, index_records):
             print "\nindex_records length = {}".format(len(index_records))
             print "index_records = {}".format(index_records)
-            kM = KMeans(init='k-means++', n_clusters=2).fit(dataSet[index_records])
+            kM = KMeans(n_clusters=2, init='k-means++').fit(dataSet[index_records])
 
             self.c_0 = kM.cluster_centers_[0]
             self.c_1 = kM.cluster_centers_[1]
