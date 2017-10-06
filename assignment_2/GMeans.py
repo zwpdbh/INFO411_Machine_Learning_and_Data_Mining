@@ -6,6 +6,10 @@ from sklearn.preprocessing import scale
 from Tools import Tools
 import matplotlib.pyplot as pl
 import math
+from sklearn.datasets.samples_generator import make_blobs
+from sklearn import cluster, datasets, mixture
+from XMeans import XMeans
+import matplotlib.cm as cm
 
 # for each cluster do the split
 # test if the split cluster fit anderson test
@@ -35,13 +39,10 @@ class GMeans:
 
         km = self.KMeans().split(dataSet=X)
         v = km.c_0 - km.c_1
-        # normalize v, need?
-        # v = v / np.sqrt(v.T * v)
-        v = v.reshape((len(v), 1))
-        v = np.asmatrix(v)
 
-        # X_prime has to be the shape of (N, )
-        X_prime = self.get_X_prime(X, v)
+        # X_prime = self.get_X_prime(X, v)
+        X_prime = self.get_X_prime_original(X, v)
+
         accept_split = self.checkAnderson(X_prime)
 
         if accept_split:
@@ -51,7 +52,17 @@ class GMeans:
             self.centroids.append(centroid)
             self.clusters.append(np.array(original_X))
 
+    def get_X_prime_original(self, X, v):
+        # normalize v, need?
+        # v = v / np.sqrt(v.T * v)
+        X_prime = scale(X.dot(v) / (v.dot(v)))
+
+        return X_prime
+
     def get_X_prime(self, X, v):
+        v = v.reshape((len(v), 1))
+        v = np.asmatrix(v)
+
         X_prime = X * v
         # X_prime is: (n, 1) <class 'numpy.matrixlib.defmatrix.matrix'>
         tmp = []
@@ -59,11 +70,10 @@ class GMeans:
             tmp.append(x.item(0))
         return tmp
 
-    def getWhatIWant(data):
-        a = []
-        for i in data:
-            a.append(i[0])
-        return np.asarray(a)
+    def get_X_prime_new(self, X):
+        # compute eigenvector of X
+        pca = self.PCA(X)
+        e = pca.find_the_first_eigen_vector()
 
     def checkAnderson(self, X):
         X = X - np.mean(X)
@@ -133,28 +143,14 @@ class GMeans:
 
 
 def demo1():
-    # demo one:
-    dataSet1 = np.random.randn(100, 2) + 2
-    dataSet2 = np.random.randn(100, 2) + 5
-    dataSet3 = np.random.randn(200, 2) - 2
-    dataSet4 = np.random.randn(50, 2)-5
-    dataSet5 = np.random.randn(20, 2) - 10
+    X, y = make_blobs(n_samples=1000, centers=5, cluster_std=[0.4, 1.5, 1.7, 0.4, 1.3], n_features=2, random_state=0)
 
-    total_dataSet = np.vstack((dataSet1, dataSet2))
-    total_dataSet = np.vstack((total_dataSet, dataSet3))
-    total_dataSet = np.vstack((total_dataSet, dataSet4))
-    total_dataSet = np.vstack((total_dataSet, dataSet5))
+    gm = GMeans().fit(X)
 
-    total_dataSet = np.random.permutation(total_dataSet)
-
-    gM = GMeans(strictlevel=4).fit(total_dataSet)
-
-    print "found {} clusters".format(len(gM.clusters))
-    print "found {} centroids".format(len(gM.centroids))
-
-    # Tools.drawDataSet(total_dataSet, 'g+')
-    Tools.drawCentroids(gM.centroids)
-    Tools.drawClusters(gM.clusters)
+    print "found {} clusters".format(len(gm.clusters))
+    print "found {} centroids".format(len(gm.centroids))
+    Tools.drawCentroids(gm.centroids)
+    Tools.drawClusters(gm.clusters)
 
 def demo2():
     img = Image.open("africa.jpg")
@@ -167,19 +163,68 @@ def demo2():
     gm = GMeans().fit(pix)
     print len(gm.centroids)
 
+def demo3():
+    # Anisotropicly distributed data
+    random_state = 170
+    X, y = datasets.make_blobs(n_samples=1000, centers=7, n_features=2, random_state=random_state)
 
+    transformation = [[0.6, -0.6], [-0.4, 0.8]]
+    X_aniso = np.dot(X, transformation)
+
+    gm = GMeans().fit(X_aniso)
+
+    print "found {} clusters".format(len(gm.clusters))
+    print "found {} centroids".format(len(gm.centroids))
+    Tools.drawCentroids(gm.centroids)
+    Tools.drawClusters(gm.clusters)
+
+def demo_XMean():
+    random_state = 170
+    X, y = datasets.make_blobs(n_samples=1000, centers=7, n_features=2, random_state=random_state)
+
+    xm = XMeans()
+    xm = xm.fit(X)
+
+    print "found {} centroids".format(len(xm.cluster_centers_))
+    Ys = np.array([[4, 8, 12, 16],
+                   [1, 4, 9, 16],
+                   [17, 10, 13, 18],
+                   [9, 10, 18, 11],
+                   [4, 15, 17, 6],
+                   [7, 10, 8, 7],
+                   [9, 0, 10, 11],
+                   [14, 1, 15, 5],
+                   [8, 15, 9, 14],
+                   [20, 7, 1, 5]])
+
+    colors = cm.rainbow(np.linspace(0, 1, len(Ys)))
+
+    # draw centers
+    for c in xm.cluster_centers_:
+        pl.plot(c[0], c[1], 'ro')
+
+    # draw each data
+    for i in range(len(xm.labels_)):
+        p = X[i]
+        label = xm.labels_[i]
+        pl.scatter(p[0], p[1], s=1, c=colors[label % len(colors)])
 
 
 if __name__ == '__main__':
 
 
     # demo1()
+    # demo2()
+    # demo3()
 
-    demo2()
+    demo_XMean()
+
+    pl.show()
 
     # list = [[1], [2], [3], [4], [5]]
     # print getWhatIWant(list).shape
 
-    pl.show()
+
+
 
 

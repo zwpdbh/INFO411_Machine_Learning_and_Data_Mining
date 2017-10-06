@@ -89,7 +89,6 @@ from scipy import stats
 from sklearn.cluster import KMeans
 
 class XMeans(KMeans):
-
     def __init__(self, k_init = 2, **k_means_args):
         self.k_init = k_init
         self.k_means_args = k_means_args

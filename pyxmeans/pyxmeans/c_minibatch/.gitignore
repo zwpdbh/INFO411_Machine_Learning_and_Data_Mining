@@ -1,5 +1,0 @@
-*.o
-*.png
-data/
-*.dSYM
-minibatch

@@ -2,7 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e2f9305-ee4c-41ae-bfcb-2d684866ca4d" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/benchmark.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/benchmark.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/_minibatch.c" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/benchmarks/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/benchmarks/generate_random_indicies.c" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/distance.c" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/distance.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/future/xmeans.c" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/future/xmeans.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/generate_data.c" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/generate_data.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/minibatch.c" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/minibatch.h" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/visualize.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/mini_batch.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/xmeans.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/setup.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/GMeans.py" afterPath="$PROJECT_DIR$/assignment_2/GMeans.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/Tools.py" afterPath="$PROJECT_DIR$/assignment_2/Tools.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/XMeans.py" afterPath="$PROJECT_DIR$/assignment_2/XMeans.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,33 +51,9 @@
       <file leaf-file-name="GMeans.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="76" column="38" lean-forward="true" selection-start-line="76" selection-start-column="38" selection-end-line="76" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="morestats.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda2/lib/python2.7/site-packages/scipy/stats/morestats.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="1426" column="0" lean-forward="false" selection-start-line="1426" selection-start-column="0" selection-end-line="1426" selection-end-column="0" />
+            <state relative-caret-position="-398">
+              <caret line="5" column="23" lean-forward="true" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lab4.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lab4.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="9" />
-              <folding>
-                <element signature="e#21#39#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -59,8 +61,8 @@
       <file leaf-file-name="playground.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assignment_2/playground.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="838">
-              <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state relative-caret-position="529">
+              <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -71,8 +73,8 @@
       <file leaf-file-name="Tools.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="349">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -83,10 +85,22 @@
       <file leaf-file-name="XMeans.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assignment_2/XMeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-642">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="25" />
+            <state relative-caret-position="116">
+              <caret line="97" column="29" lean-forward="false" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
               <folding>
                 <element signature="e#3357#3375#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lab4.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lab4.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="439">
+              <caret line="42" column="48" lean-forward="false" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+              <folding>
+                <element signature="e#21#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,9 +117,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getCentroids</find>
-      <find>self.nr</find>
-      <find>hstack</find>
       <find>power_iteration</find>
       <find>power</find>
       <find>computePCA</find>
@@ -133,6 +144,9 @@
       <find>print</find>
       <find>get_X_prime</find>
       <find>getWhatIWant</find>
+      <find>find_the_first_eigen_vector</find>
+      <find>min_obs</find>
+      <find>stopping_criteria</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -168,18 +182,18 @@
         <option value="$PROJECT_DIR$/assignment_2/__init__.py" />
         <option value="$PROJECT_DIR$/XMeans.py" />
         <option value="$PROJECT_DIR$/assignment_2/KMeans.py" />
-        <option value="$PROJECT_DIR$/assignment_2/XMeans.py" />
         <option value="$PROJECT_DIR$/assignment_2/playground.py" />
-        <option value="$PROJECT_DIR$/assignment_2/Tools.py" />
         <option value="$PROJECT_DIR$/lab4.py" />
+        <option value="$PROJECT_DIR$/assignment_2/XMeans.py" />
+        <option value="$PROJECT_DIR$/assignment_2/Tools.py" />
         <option value="$PROJECT_DIR$/assignment_2/GMeans.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="364" />
-    <option name="y" value="23" />
-    <option name="width" value="1078" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="183" />
+    <option name="y" value="80" />
+    <option name="width" value="1401" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -212,11 +226,6 @@
               <item name="INFO411_Machine_Learning_and_Data_Mining" type="b2602c69:ProjectViewProjectNode" />
               <item name="INFO411_Machine_Learning_and_Data_Mining" type="462c0819:PsiDirectoryNode" />
               <item name="assignment_2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="INFO411_Machine_Learning_and_Data_Mining" type="b2602c69:ProjectViewProjectNode" />
-              <item name="INFO411_Machine_Learning_and_Data_Mining" type="462c0819:PsiDirectoryNode" />
-              <item name="pyxmeans" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -563,10 +572,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="364" y="23" width="1078" height="877" extended-state="0" />
+    <frame x="40" y="23" width="1401" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17181467" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13097866" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23593964" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -646,7 +655,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/assignment_2/GMeans.py</url>
-          <line>179</line>
+          <line>223</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
@@ -862,46 +871,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="132" column="0" lean-forward="false" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assignment_2/playground.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="838">
-          <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assignment_2/XMeans.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-642">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="25" />
-          <folding>
-            <element signature="e#3357#3375#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lab4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="37" column="9" lean-forward="false" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="9" />
-          <folding>
-            <element signature="e#21#39#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -913,13 +883,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lab4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="42" column="48" lean-forward="false" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+          <folding>
+            <element signature="e#21#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assignment_2/XMeans.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="97" column="29" lean-forward="false" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
+          <folding>
+            <element signature="e#3357#3375#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assignment_2/playground.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="76" column="38" lean-forward="true" selection-start-line="76" selection-start-column="38" selection-end-line="76" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-398">
+          <caret line="5" column="23" lean-forward="true" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>

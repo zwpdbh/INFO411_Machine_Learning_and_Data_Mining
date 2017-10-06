@@ -42,7 +42,6 @@ class Tools:
 
     @staticmethod
     def drawClusters(clusters):
-        X = [1, 2, 3, 4]
         Ys = np.array([[4, 8, 12, 16],
                        [1, 4, 9, 16],
                        [17, 10, 13, 18],
