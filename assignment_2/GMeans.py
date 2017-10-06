@@ -5,6 +5,7 @@ from PIL import Image, ImageDraw, ImageOps
 from sklearn.preprocessing import scale
 from Tools import Tools
 import matplotlib.pyplot as pl
+import math
 
 # for each cluster do the split
 # test if the split cluster fit anderson test
@@ -32,30 +33,16 @@ class GMeans:
         X = np.asarray(X)
         centroid = np.mean(X, axis=0)
 
-        # # if i use eigenvector to initalize the position of centroids
-        # e = self.get_prime_vector(X)
-        # # use e to create initial centroids
-        # initial_c0 = centroid + e
-
         km = self.KMeans().split(dataSet=X)
         v = km.c_0 - km.c_1
         # normalize v, need?
-        v = v / np.sqrt(v.T * v)
-
-        # X_prime = scale(X.dot(v) / (v.dot(v)))
-
+        # v = v / np.sqrt(v.T * v)
         v = v.reshape((len(v), 1))
         v = np.asmatrix(v)
-        # print X.shape, type(X)
-        # print v.shape, type(v)
-        X_prime = X * v
 
-        print X_prime.shape
-        # use X * e, matrix multiple to map the X into one dimension
-        # currently, v = [float, float, float], we need to convert it into
-        # the eigen vector form [matrix, matrix, matrix]
-
-        accept_split = self.checkGaussianStatistic(X_prime)
+        # X_prime has to be the shape of (N, )
+        X_prime = self.get_X_prime(X, v)
+        accept_split = self.checkAnderson(X_prime)
 
         if accept_split:
             self.__recursive_clustering(km.cluster_0)
@@ -64,28 +51,35 @@ class GMeans:
             self.centroids.append(centroid)
             self.clusters.append(np.array(original_X))
 
-    def checkGaussianStatistic(self, X):
+    def get_X_prime(self, X, v):
+        X_prime = X * v
+        # X_prime is: (n, 1) <class 'numpy.matrixlib.defmatrix.matrix'>
+        tmp = []
+        for x in X_prime:
+            tmp.append(x.item(0))
+        return tmp
+
+    def getWhatIWant(data):
+        a = []
+        for i in data:
+            a.append(i[0])
+        return np.asarray(a)
+
+    def checkAnderson(self, X):
         X = X - np.mean(X)
         output = anderson(X)
         statistic = output[0]
         critical_value = output[1][self.stricklevel]
+        if np.isnan(statistic):
+            return False
 
+        # print statistic, critical_value
         if statistic > critical_value:
             return True
         else:
             return False
 
-    def get_X_prime(self, X):
-        pca = self.PCA(X)
-        e = pca.find_the_first_eigen_vector()
-        # print "the prime eigenvector = \n{}".format(e)
-        return X * e
-
-    def get_prime_vector(self, X):
-        pca = self.PCA(X)
-        e = pca.find_the_first_eigen_vector()
-        return e
-
+    # inner class for doing the K-Means clustering
     class KMeans:
         def __init__(self):
             self.centroids = np.array([])
@@ -165,8 +159,7 @@ def demo1():
 def demo2():
     img = Image.open("africa.jpg")
     img = ImageOps.fit(img, (200, 100), Image.ANTIALIAS)
-
-    img.show()
+    # img.show()
 
     pix = np.array(img)[:, :, 0:3]
     pix = pix.reshape((-1, 3)).astype(float)
@@ -174,12 +167,8 @@ def demo2():
     gm = GMeans().fit(pix)
     print len(gm.centroids)
 
-    pix_prime = gm.get_X_prime(pix)
-    print "begin computing the anderson statistics:"
-    print "data size is {}".format(pix_prime.shape)
-    output = anderson(pix_prime)
-    print "the anderson statistics is \n{}".format(output[0])
-    print "cricital value = {}".format(output[1])
+
+
 
 if __name__ == '__main__':
 
@@ -187,6 +176,9 @@ if __name__ == '__main__':
     # demo1()
 
     demo2()
+
+    # list = [[1], [2], [3], [4], [5]]
+    # print getWhatIWant(list).shape
 
     pl.show()
 
