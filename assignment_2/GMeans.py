@@ -52,7 +52,6 @@ class GMeans:
             self.centroids.append(centroid)
             self.index_result.append(original_indexes)
 
-
     def fit(self, X):
         self.X = X.copy()
         for i in range(len(X)):
@@ -73,7 +72,6 @@ class GMeans:
         self.labels = np.asarray(self.labels).astype(int)
         return self
 
-
     def get_X_prime(self, X, v):
         # normalize v, need?
         # v = v / np.sqrt(v.T * v)
@@ -88,7 +86,6 @@ class GMeans:
             tmp.append(each[0])
 
         return tmp
-
 
     def checkAnderson(self, X):
         X = X - np.mean(X)
@@ -163,7 +160,6 @@ class GMeans:
             self.c_0 = c_0
             self.c_1 = c_1
 
-
         def split(self, dataSet, index_records):
             # print "\nindex_records length = {}".format(len(index_records))
             # print "index_records = {}".format(index_records)
@@ -182,31 +178,6 @@ class GMeans:
                     self.index_records_1.append(index_records[index])
 
             return self
-
-
-    # class PCA:
-    #     def __init__(self, data):
-    #         self.X = np.matrix(data)
-    #         self.nr = self.X.shape[0]
-    #         self.dim = self.X.shape[1]
-    #
-    #         # make it zero meaned:
-    #         self.m = np.mean(self.X, axis=0)
-    #         self.X -= self.m
-    #         self.cov = (self.X.T * self.X) / self.nr
-    #
-    #     def find_the_first_eigen_vector(self):
-    #         w = np.matrix(np.ones(self.dim)).T
-    #         w = w / np.sqrt(w.T * w)
-    #         e = None
-    #         for i in range(100):
-    #             e = self.cov * w
-    #             e = e / np.sqrt(e.T * e)
-    #             if np.dot(e.T, w) == 1:
-    #                 break
-    #             else:
-    #                 w = e
-    #         return e
 
 
 def demo1():
@@ -252,6 +223,35 @@ def demo_XMean():
     Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_)
 
 
+def summary(n_samples, min_n_clusters, max_n_clusters, n_features, random_state=0, n_loops=10):
+    gm_scores = []
+    xm_scores = []
+
+    for n_cluster in np.linspace(min_n_clusters, max_n_clusters, max_n_clusters - min_n_clusters + 1):
+        total_gm_score = 0
+        total_xm_score = 0
+
+        for i in range(n_loops):
+            n_cluster = n_cluster.astype(int)
+            X, y = datasets.make_blobs(n_samples=n_samples, n_features=n_features, centers=n_cluster,
+                                       random_state=random_state)
+            gm = GMeans().fit(X)
+            xm = XMeans().fit(X)
+            gm_score = silhouette_score(X, gm.labels, metric='euclidean')
+            xm_score = silhouette_score(X, xm.labels_, metric='euclidean')
+            total_gm_score += gm_score
+            total_xm_score += xm_score
+
+        total_gm_score = total_gm_score / (n_loops * 1.0)
+        total_xm_score = total_xm_score / (n_loops * 1.0)
+        print "n_samples = {}, n_features = {}, n_cluster = {}, gm_score = {}, xm_score = {}" \
+            .format(n_samples, n_features, n_cluster, total_gm_score, total_xm_score)
+        gm_scores.append(total_gm_score)
+        xm_scores.append(total_xm_score)
+
+    return gm_scores, xm_scores
+
+
 # collect a group of score while changing the number of centers
 def collect_silhouette_score_for_gmeans():
     min_n_clusters = 3
@@ -263,8 +263,9 @@ def collect_silhouette_score_for_gmeans():
             n_cluster = n_cluster.astype(int)
             X, y = datasets.make_blobs(n_samples=n, n_features=2, centers=n_cluster, random_state=0)
             gm = GMeans().fit(X)
-            print "n_samples = {}, n_cluster = {}, score = {}".\
+            print "n_samples = {}, n_cluster = {}, score = {}". \
                 format(n, n_cluster, silhouette_score(X, gm.labels, metric='euclidean'))
+
 
 def collect_silhouette_score_for_xmeans():
     min_n_clusters = 3
@@ -276,8 +277,9 @@ def collect_silhouette_score_for_xmeans():
             n_cluster = n_cluster.astype(int)
             X, y = datasets.make_blobs(n_samples=n, n_features=2, centers=n_cluster, random_state=0)
             xm = XMeans().fit(X)
-            print "n_samples = {}, n_cluster = {}, score = {}".\
+            print "n_samples = {}, n_cluster = {}, score = {}". \
                 format(n, n_cluster, silhouette_score(X, xm.labels_, metric='euclidean'))
+
 
 def show_different_clusters_with_k_means():
     pl.figure(figsize=(8, 8))
@@ -331,7 +333,6 @@ def show_different_clusters_with_g_means():
     random_state = 170
     X, y = make_blobs(n_samples=n_samples, random_state=random_state)
 
-
     # Different variance
     X_varied, y_varied = make_blobs(n_samples=n_samples,
                                     cluster_std=[1.0, 2.5, 0.5],
@@ -356,19 +357,48 @@ def show_different_clusters_with_g_means():
     pl.subplot(223)
     Tools.draw(X_varied, gm.labels, gm.centroids, "title")
 
-
     pl.show()
+
 
 if __name__ == '__main__':
-    n_clusters = 3
-    X, y = datasets.make_blobs(n_samples=1000, n_features=2, centers=n_clusters, random_state=0)
-    gm = GMeans().fit(X)
-    print "n_cluster = {} ".format(n_clusters), silhouette_score(X, gm.labels, metric='euclidean')
-    Tools.draw(X, gm.labels, gm.centroids, title="g-means")
-    pl.show()
+    # n_clusters = 3
+    # X, y = datasets.make_blobs(n_samples=1000, n_features=2, centers=n_clusters, random_state=0)
+    # gm = GMeans().fit(X)
+    # print "n_cluster = {} ".format(n_clusters), silhouette_score(X, gm.labels, metric='euclidean')
+    # Tools.draw(X, gm.labels, gm.centroids, title="g-means")
+    # pl.show()
 
     # collect_silhouette_score_for_gmeans()
     # collect_silhouette_score_for_xmeans()
 
     # show_different_clusters_with_k_means()
     # show_different_clusters_with_g_means()
+
+
+    # run different set of data to draw graph
+    min_n_cluster = 3
+    max_n_cluster = 20
+    n_loops = 10
+    indexes = []
+    for index in np.linspace(min_n_cluster, max_n_cluster, max_n_cluster - min_n_cluster + 1):
+        indexes.append(index)
+
+
+
+    n_features = 8
+    n_samples = 2000
+    gm_2, xm_2 = summary(n_samples, min_n_cluster, max_n_cluster, n_features=n_features, random_state=0,
+                                  n_loops=n_loops)
+    pl.plot(indexes, gm_2, label="gm_n_feature = {}, n_samples = {}".format(n_features, n_samples))
+    pl.plot(indexes, xm_2, '--', label="xm_n_feature = {}, n_samples = {}".format(n_features, n_samples))
+
+
+    # n_features = 4
+    # n_samples = 2000
+    # gm_2, xm_2 = summary(n_samples, min_n_cluster, max_n_cluster, n_features=n_features, random_state=0,
+    #                               n_loops=n_loops)
+    # pl.plot(indexes, gm_2, label="gm_n_feature = {}, n_samples = {}".format(n_features, n_samples))
+    # pl.plot(indexes, xm_2, '--', label="xm_n_feature = {}, n_samples = {}".format(n_features, n_samples))
+
+    pl.legend()
+    pl.show()
