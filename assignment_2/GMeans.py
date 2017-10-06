@@ -20,14 +20,51 @@ class GMeans:
         self.centroids = []
         self.clusters = []
         self.index_records = []
+        self.X = None
+        self.labels = []
+        self.index_result = []
+
+    def __recursive_cluster_index(self, indexes):
+        if len(indexes) < 2:
+            return
+        original_indexes = []
+        for index in indexes:
+            original_indexes.append(index)
+
+        centroid = np.mean(self.X[indexes], axis=0)
+
+        km = self.KMeans().split(dataSet=self.X, index_records=indexes)
+        v = km.c_0 - km.c_1
+
+        X_prime = self.get_X_prime_original(self.X[indexes], v)
+        accept_split = self.checkAnderson(X_prime)
+
+        if accept_split:
+            # km.cluster_0 should be the index_records
+            self.__recursive_cluster_index(km.index_records_0)
+            self.__recursive_cluster_index(km.index_records_1)
+        else:
+            self.centroids.append(centroid)
+            self.index_result.append(original_indexes)
 
     def fit(self, X):
+        self.X = X.copy()
         for i in range(len(X)):
             self.index_records.append(i)
-            
-        self.__recursive_clustering(X)
+        # self.index_records = np.asarray(self.index_records)
+
+        self.__recursive_cluster_index(self.index_records)
         self.centroids = np.array(self.centroids)
 
+        # print len(self.centroids), type(self.centroids)
+        # print len(self.index_result), type(self.index_result)
+        # generate lables
+        self.labels = np.zeros(len(self.index_records))
+        for label in range(len(self.index_result)):
+            for each in self.index_result[label]:
+                self.labels[each] = label
+
+        self.labels = np.asarray(self.labels).astype(int)
         return self
 
     # recursively apply k-means on X, with n-clusters = 2
@@ -50,8 +87,8 @@ class GMeans:
         accept_split = self.checkAnderson(X_prime)
 
         if accept_split:
-            self.__recursive_clustering(km.cluster_0)
-            self.__recursive_clustering(km.cluster_1)
+            self.__recursive_clustering(km.index_records_0)
+            self.__recursive_clustering(km.index_records_1)
         else:
             self.centroids.append(centroid)
             self.clusters.append(np.array(original_X))
@@ -97,27 +134,23 @@ class GMeans:
     class KMeans:
         def __init__(self):
             self.centroids = np.array([])
-            self.cluster_0 = []
-            self.cluster_1 = []
+            self.index_records_0 = []
+            self.index_records_1 = []
             self.c_0 = None
             self.c_1 = None
 
-        def split(self, dataSet):
-            kM = KMeans(init='k-means++', n_clusters=2).fit(dataSet)
+        def split(self, dataSet, index_records):
+            kM = KMeans(init='k-means++', n_clusters=2).fit(dataSet[index_records])
 
             self.c_0 = kM.cluster_centers_[0]
             self.c_1 = kM.cluster_centers_[1]
 
-            index = 0
-            for label in kM.labels_:
-                if label == 0:
-                    self.cluster_0.append(dataSet[index])
+            for index in range(len(index_records)):
+                if kM.labels_[index] == 0:
+                    self.index_records_0.append(index_records[index])
                 else:
-                    self.cluster_1.append(dataSet[index])
-                index += 1
+                    self.index_records_1.append(index_records[index])
 
-            self.cluster_0 = np.array(self.cluster_0)
-            self.cluster_1 = np.array(self.cluster_1)
             return self
 
     class PCA:
@@ -147,25 +180,21 @@ class GMeans:
 
 
 def demo1():
-    X, y = make_blobs(n_samples=1000, centers=5, cluster_std=[0.4, 1.5, 1.7, 0.4, 1.3], n_features=2, random_state=0)
-
+    X, y = make_blobs(n_samples=200, centers=5, n_features=2, random_state=100)
     gm = GMeans().fit(X)
-
-    print "found {} clusters".format(len(gm.clusters))
     print "found {} centroids".format(len(gm.centroids))
-    Tools.drawCentroids(gm.centroids)
-    Tools.drawClusters(gm.clusters)
+    Tools.draw(X=X, lables=gm.labels, centroids=gm.centroids)
 
-def demo2():
-    img = Image.open("africa.jpg")
-    img = ImageOps.fit(img, (200, 100), Image.ANTIALIAS)
-    # img.show()
-
-    pix = np.array(img)[:, :, 0:3]
-    pix = pix.reshape((-1, 3)).astype(float)
-
-    gm = GMeans().fit(pix)
-    print len(gm.centroids)
+# def demo2():
+#     img = Image.open("africa.jpg")
+#     img = ImageOps.fit(img, (200, 100), Image.ANTIALIAS)
+#     # img.show()
+#
+#     pix = np.array(img)[:, :, 0:3]
+#     pix = pix.reshape((-1, 3)).astype(float)
+#
+#     gm = GMeans().fit(pix)
+#     print len(gm.centroids)
 
 def demo3():
     # Anisotropicly distributed data
@@ -185,48 +214,27 @@ def demo3():
 def demo_XMean():
     random_state = 170
     X, y = datasets.make_blobs(n_samples=1000, centers=7, n_features=2, random_state=random_state)
-
     xm = XMeans()
     xm = xm.fit(X)
 
-    print "found {} centroids".format(len(xm.cluster_centers_))
-    Ys = np.array([[4, 8, 12, 16],
-                   [1, 4, 9, 16],
-                   [17, 10, 13, 18],
-                   [9, 10, 18, 11],
-                   [4, 15, 17, 6],
-                   [7, 10, 8, 7],
-                   [9, 0, 10, 11],
-                   [14, 1, 15, 5],
-                   [8, 15, 9, 14],
-                   [20, 7, 1, 5]])
-
-    colors = cm.rainbow(np.linspace(0, 1, len(Ys)))
-
-    # draw centers
-    for c in xm.cluster_centers_:
-        pl.plot(c[0], c[1], 'ro')
-
-    # draw each data
-    for i in range(len(xm.labels_)):
-        p = X[i]
-        label = xm.labels_[i]
-        pl.scatter(p[0], p[1], s=1, c=colors[label % len(colors)])
+    Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_)
 
 
 if __name__ == '__main__':
 
+    X, y = datasets.make_blobs(n_samples=1000, centers=10, n_features=2, random_state=0)
 
-    # demo1()
-    # demo2()
-    # demo3()
+    xm = XMeans()
+    xm = xm.fit(X)
 
-    demo_XMean()
+    gm = GMeans().fit(X)
+    Tools.draw(X=X, lables=gm.labels, centroids=gm.centroids, title="G-Mean")
+
+    pl.figure()
+    Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_, title="X-Mean")
 
     pl.show()
 
-    # list = [[1], [2], [3], [4], [5]]
-    # print getWhatIWant(list).shape
 
 
 
