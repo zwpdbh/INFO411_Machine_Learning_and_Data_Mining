@@ -222,16 +222,15 @@ def demo_XMean():
 
 if __name__ == '__main__':
 
-    X, y = datasets.make_blobs(n_samples=1000, centers=10, n_features=2, random_state=0)
-
-    xm = XMeans()
-    xm = xm.fit(X)
+    X, y = datasets.make_blobs(n_samples=100, centers=2, n_features=2, random_state=0)
 
     gm = GMeans().fit(X)
     Tools.draw(X=X, lables=gm.labels, centroids=gm.centroids, title="G-Mean")
 
-    pl.figure()
-    Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_, title="X-Mean")
+    # pl.figure()
+    # xm = XMeans()
+    # xm = xm.fit(X)
+    # Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_, title="X-Mean")
 
     pl.show()
 
