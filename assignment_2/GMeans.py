@@ -19,8 +19,12 @@ class GMeans:
         self.stricklevel = strictlevel
         self.centroids = []
         self.clusters = []
+        self.index_records = []
 
     def fit(self, X):
+        for i in range(len(X)):
+            self.index_records.append(i)
+            
         self.__recursive_clustering(X)
         self.centroids = np.array(self.centroids)
 

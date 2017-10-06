@@ -2,33 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e2f9305-ee4c-41ae-bfcb-2d684866ca4d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/benchmark.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/benchmark.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/_minibatch.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/benchmarks/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/benchmarks/generate_random_indicies.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/distance.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/distance.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/future/xmeans.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/future/xmeans.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/generate_data.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/generate_data.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/minibatch.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/minibatch.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/c_minibatch/visualize.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/mini_batch.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/pyxmeans/xmeans.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pyxmeans/setup.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/GMeans.py" afterPath="$PROJECT_DIR$/assignment_2/GMeans.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/Tools.py" afterPath="$PROJECT_DIR$/assignment_2/Tools.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/XMeans.py" afterPath="$PROJECT_DIR$/assignment_2/XMeans.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,9 +25,11 @@
       <file leaf-file-name="GMeans.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-398">
-              <caret line="5" column="23" lean-forward="true" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-              <folding />
+            <state relative-caret-position="248">
+              <caret line="26" column="12" lean-forward="false" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -655,7 +631,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/assignment_2/GMeans.py</url>
-          <line>223</line>
+          <line>227</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
@@ -925,9 +901,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret line="5" column="23" lean-forward="true" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="248">
+          <caret line="26" column="12" lean-forward="false" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
