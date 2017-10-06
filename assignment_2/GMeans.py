@@ -10,6 +10,8 @@ from sklearn.datasets.samples_generator import make_blobs
 from sklearn import cluster, datasets, mixture
 from XMeans import XMeans
 import matplotlib.cm as cm
+from sklearn.metrics import silhouette_score
+
 
 # for each cluster do the split
 # test if the split cluster fit anderson test
@@ -140,8 +142,8 @@ class GMeans:
             self.c_1 = None
 
         def split(self, dataSet, index_records):
-            print "\nindex_records length = {}".format(len(index_records))
-            print "index_records = {}".format(index_records)
+            # print "\nindex_records length = {}".format(len(index_records))
+            # print "index_records = {}".format(index_records)
             kM = KMeans(n_clusters=2, init='k-means++').fit(dataSet[index_records])
 
             self.c_0 = kM.cluster_centers_[0]
@@ -180,12 +182,12 @@ class GMeans:
             return e
 
 
-
 def demo1():
     X, y = make_blobs(n_samples=200, centers=5, n_features=2, random_state=100)
     gm = GMeans().fit(X)
     print "found {} centroids".format(len(gm.centroids))
     Tools.draw(X=X, lables=gm.labels, centroids=gm.centroids)
+
 
 # def demo2():
 #     img = Image.open("africa.jpg")
@@ -213,6 +215,7 @@ def demo3():
     Tools.drawCentroids(gm.centroids)
     Tools.drawClusters(gm.clusters)
 
+
 def demo_XMean():
     random_state = 170
     X, y = datasets.make_blobs(n_samples=1000, centers=7, n_features=2, random_state=random_state)
@@ -222,27 +225,40 @@ def demo_XMean():
     Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_)
 
 
+# collect a group of score while changing the number of centers
+def collect_silhouette_score_for_gmeans():
+    min_n_clusters = 3
+    max_n_clusters = 30
+
+    n_samples = [1000, 2000, 3000, 4000, 5000]
+    for n in n_samples:
+        for n_cluster in np.linspace(min_n_clusters, max_n_clusters, max_n_clusters - min_n_clusters + 1):
+            n_cluster = n_cluster.astype(int)
+            X, y = datasets.make_blobs(n_samples=n, n_features=2, centers=n_cluster, random_state=0)
+            gm = GMeans().fit(X)
+            print "n_samples = {}, n_cluster = {}, score = {}".\
+                format(n, n_cluster, silhouette_score(X, gm.labels, metric='euclidean'))
+
+def collect_silhouette_score_for_xmeans():
+    min_n_clusters = 3
+    max_n_clusters = 30
+
+    n_samples = [1000, 2000, 3000, 4000, 5000]
+    for n in n_samples:
+        for n_cluster in np.linspace(min_n_clusters, max_n_clusters, max_n_clusters - min_n_clusters + 1):
+            n_cluster = n_cluster.astype(int)
+            X, y = datasets.make_blobs(n_samples=n, n_features=2, centers=n_cluster, random_state=0)
+            xm = XMeans().fit(X)
+            print "n_samples = {}, n_cluster = {}, score = {}".\
+                format(n, n_cluster, silhouette_score(X, xm.labels_, metric='euclidean'))
+
 if __name__ == '__main__':
-
-    random_state = 0
-
-    # Anisotropicly distributed data
-    X, y = datasets.make_blobs(n_samples=1000, centers=7, n_features=2, random_state=random_state)
-    # transformation = [[0.6, -0.6], [-0.4, 0.8]]
-    # X = np.dot(X, transformation)
-
-    gm = GMeans().fit(X)
-    Tools.draw(X=X, lables=gm.labels, centroids=gm.centroids, title="G-Mean")
-
-    # pl.figure()
-    # xm = XMeans()
-    # xm = xm.fit(X)
-    # Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_, title="X-Mean")
-
-    pl.show()
+    # X, y = datasets.make_blobs(n_samples=1000, n_features=2, centers=30, random_state=0)
+    # gm = GMeans().fit(X)
+    # print "n_cluster = {} ".format(30), silhouette_score(X, gm.labels, metric='euclidean')
+    # Tools.draw(X, gm.labels, gm.centroids, title="g-means")
+    # pl.show()
 
 
-
-
-
-
+    # collect_silhouette_score_for_gmeans()
+    collect_silhouette_score_for_xmeans()
