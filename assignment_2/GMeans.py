@@ -392,79 +392,6 @@ def summary(n_samples, min_n_clusters, max_n_clusters, n_features, random_state=
     return gm_01_scores, gm_02_scores, xm_scores
 
 
-# collect a group of score while changing the number of centers
-def collect_silhouette_score_for_gmeans():
-    min_n_clusters = 3
-    max_n_clusters = 30
-
-    n_samples = [1000, 2000, 3000, 4000, 5000]
-    for n in n_samples:
-        for n_cluster in np.linspace(min_n_clusters, max_n_clusters, max_n_clusters - min_n_clusters + 1):
-            n_cluster = n_cluster.astype(int)
-            X, y = datasets.make_blobs(n_samples=n, n_features=2, centers=n_cluster, random_state=0)
-            gm = GMeans_01().fit(X)
-            print "n_samples = {}, n_cluster = {}, score = {}". \
-                format(n, n_cluster, silhouette_score(X, gm.labels, metric='euclidean'))
-
-
-def collect_silhouette_score_for_xmeans():
-    min_n_clusters = 3
-    max_n_clusters = 30
-
-    n_samples = [1000, 2000, 3000, 4000, 5000]
-    for n in n_samples:
-        for n_cluster in np.linspace(min_n_clusters, max_n_clusters, max_n_clusters - min_n_clusters + 1):
-            n_cluster = n_cluster.astype(int)
-            X, y = datasets.make_blobs(n_samples=n, n_features=2, centers=n_cluster, random_state=0)
-            xm = XMeans().fit(X)
-            print "n_samples = {}, n_cluster = {}, score = {}". \
-                format(n, n_cluster, silhouette_score(X, xm.labels_, metric='euclidean'))
-
-
-def show_different_clusters_with_k_means():
-    pl.figure(figsize=(8, 8))
-
-    n_samples = 1500
-    random_state = 170
-    X, y = make_blobs(n_samples=n_samples, random_state=random_state)
-
-    # Incorrect number of clusters
-    y_pred = KMeans(n_clusters=2, random_state=random_state).fit_predict(X)
-
-    pl.subplot(221)
-    pl.scatter(X[:, 0], X[:, 1], c=y_pred, s=1)
-    pl.title("Incorrect Number of Blobs")
-
-    # Anisotropicly distributed data
-    transformation = [[0.60834549, -0.63667341], [-0.40887718, 0.85253229]]
-    X_aniso = np.dot(X, transformation)
-    y_pred = KMeans(n_clusters=3, random_state=random_state).fit_predict(X_aniso)
-
-    pl.subplot(222)
-    pl.scatter(X_aniso[:, 0], X_aniso[:, 1], c=y_pred, s=1)
-    pl.title("Anisotropicly Distributed Blobs")
-
-    # Different variance
-    X_varied, y_varied = make_blobs(n_samples=n_samples,
-                                    cluster_std=[1.0, 2.5, 0.5],
-                                    random_state=random_state)
-    y_pred = KMeans(n_clusters=3, random_state=random_state).fit_predict(X_varied)
-
-    pl.subplot(223)
-    pl.scatter(X_varied[:, 0], X_varied[:, 1], c=y_pred, s=1)
-    pl.title("Unequal Variance")
-
-    # Unevenly sized blobs
-    X_filtered = np.vstack((X[y == 0][:500], X[y == 1][:100], X[y == 2][:10]))
-    y_pred = KMeans(n_clusters=3,
-                    random_state=random_state).fit_predict(X_filtered)
-
-    pl.subplot(224)
-    pl.scatter(X_filtered[:, 0], X_filtered[:, 1], c=y_pred, s=1)
-    pl.title("Unevenly Sized Blobs")
-
-    pl.show()
-
 
 def show_different_clusters_with_g_means():
     pl.figure(figsize=(8, 8))
@@ -512,7 +439,7 @@ def plot():
 
 
     # sampling
-    n_features = 8
+    n_features = 4
     n_samples = 2000
     gm_01, gm_02, xm = summary(n_samples, min_n_cluster, max_n_cluster, n_features=n_features, random_state=0,
                          n_loops=n_loops)
