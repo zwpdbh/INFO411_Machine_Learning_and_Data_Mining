@@ -453,6 +453,38 @@ def comparison(n_samples, n_clusters, n_features, random_state):
 
     pl.show()
 
+def comparion_mixture_models(n_samples, n_clusters, random_state):
+    pl.figure(figsize=(8, 8))
+    fig = pl.gcf()
+    fig.canvas.set_window_title("compare k-means, g-means and x-means in mixture model situation")
+
+    X, y = make_blobs(n_samples=n_samples, random_state=random_state, centers=n_clusters)
+
+
+    transformation = [[0.60834549, -0.63667341], [-0.40887718, 0.85253229]]
+    X = np.dot(X, transformation)
+
+    pl.subplot(221)
+    Tools.draw(X, y)
+    # Tools.draw(X, km.labels_, km.cluster_centers_, "k-means")
+    pl.title("Ground Truth: n_clusters = {}".format(n_clusters))
+
+    pl.subplot(222)
+    km = KMeans(n_clusters=n_clusters, random_state=random_state).fit(X)
+    Tools.draw(X, km.labels_, km.cluster_centers_)
+    pl.title("Using K-means with n_clusters = {}".format(n_clusters))
+
+    pl.subplot(223)
+    gm = GMeans_01().fit(X)
+    Tools.draw(X, gm.labels, gm.centroids)
+    pl.title("G-means: n_clusters = {}".format(len(gm.centroids)))
+
+    pl.subplot(224)
+    xm = XMeans().fit(X)
+    Tools.draw(X, xm.labels_, xm.cluster_centers_)
+    pl.title("X-means: n_clusters = {}".format(len(xm.cluster_centers_)))
+
+    pl.show()
 
 def plot_summary():
     # run different set of data to draw graph
@@ -501,7 +533,8 @@ if __name__ == '__main__':
     # plot()
 
     # comparison(n_clusters=10, n_samples=2300, n_features=2, random_state=0)
-    comparison_gm(n_clusters=10, n_samples=2300, n_features=2, random_state=100)
+    # comparison_gm(n_clusters=10, n_samples=2300, n_features=2, random_state=100)
 
+    comparion_mixture_models(n_samples=800, n_clusters=5, random_state=50)
 
 
