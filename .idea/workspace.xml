@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e2f9305-ee4c-41ae-bfcb-2d684866ca4d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/GMeans.py" afterPath="$PROJECT_DIR$/assignment_2/GMeans.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,24 +22,52 @@
     <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GMeans.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="387" column="18" lean-forward="false" selection-start-line="387" selection-start-column="18" selection-end-line="387" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#6153#6167#0" expanded="false" />
-                <element signature="e#8523#9079#0" expanded="false" />
-                <element signature="e#9129#9686#0" expanded="false" />
-                <element signature="e#11277#12308#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="GMeans.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="608">
+                  <caret line="38" column="27" lean-forward="true" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="27" />
+                  <folding>
+                    <element signature="e#0#18#0" expanded="true" />
+                    <element signature="e#7058#7396#0" expanded="false" />
+                    <element signature="e#7457#7712#0" expanded="false" />
+                    <element signature="e#7767#7917#0" expanded="false" />
+                    <element signature="e#7964#8874#0" expanded="false" />
+                    <element signature="e#10277#10291#0" expanded="false" />
+                    <element signature="e#14294#15783#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="GMeans.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-2472">
+                  <caret line="169" column="27" lean-forward="false" selection-start-line="169" selection-start-column="27" selection-end-line="169" selection-end-column="27" />
+                  <folding>
+                    <element signature="e#0#18#0" expanded="true" />
+                    <element signature="e#7058#7396#0" expanded="false" />
+                    <element signature="e#7457#7712#0" expanded="false" />
+                    <element signature="e#7767#7917#0" expanded="false" />
+                    <element signature="e#7964#8874#0" expanded="false" />
+                    <element signature="e#10277#10291#0" expanded="false" />
+                    <element signature="e#14294#15783#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -118,14 +147,15 @@
         <option value="$PROJECT_DIR$/lab4.py" />
         <option value="$PROJECT_DIR$/assignment_2/XMeans.py" />
         <option value="$PROJECT_DIR$/assignment_2/Tools.py" />
+        <option value="$PROJECT_DIR$/assignment_2/GMeans_01.py" />
         <option value="$PROJECT_DIR$/assignment_2/GMeans.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="268" />
-    <option name="y" value="280" />
-    <option name="width" value="1401" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="180" />
+    <option name="y" value="23" />
+    <option name="width" value="1400" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -504,10 +534,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="268" y="280" width="1401" height="877" extended-state="0" />
+    <frame x="45" y="23" width="1400" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17071377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17083947" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23593964" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35805628" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
@@ -579,11 +609,6 @@
           <url>file://$PROJECT_DIR$/lab4.py</url>
           <line>53</line>
           <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/assignment_2/GMeans.py</url>
-          <line>160</line>
-          <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="53" />
@@ -840,14 +865,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="387" column="18" lean-forward="false" selection-start-line="387" selection-start-column="18" selection-end-line="387" selection-end-column="18" />
+        <state relative-caret-position="-2472">
+          <caret line="169" column="27" lean-forward="false" selection-start-line="169" selection-start-column="27" selection-end-line="169" selection-end-column="27" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#6153#6167#0" expanded="false" />
-            <element signature="e#8523#9079#0" expanded="false" />
-            <element signature="e#9129#9686#0" expanded="false" />
-            <element signature="e#11277#12308#0" expanded="false" />
+            <element signature="e#7058#7396#0" expanded="false" />
+            <element signature="e#7457#7712#0" expanded="false" />
+            <element signature="e#7767#7917#0" expanded="false" />
+            <element signature="e#7964#8874#0" expanded="false" />
+            <element signature="e#10277#10291#0" expanded="false" />
+            <element signature="e#14294#15783#0" expanded="false" />
           </folding>
         </state>
       </provider>
