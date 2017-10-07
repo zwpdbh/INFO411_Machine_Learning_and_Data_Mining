@@ -25,15 +25,14 @@
       <file leaf-file-name="GMeans.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4811">
-              <caret line="41" column="41" lean-forward="false" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="41" />
+            <state relative-caret-position="-2468">
+              <caret line="302" column="42" lean-forward="true" selection-start-line="302" selection-start-column="42" selection-end-line="302" selection-end-column="42" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#7058#7396#0" expanded="false" />
-                <element signature="e#7457#7712#0" expanded="false" />
-                <element signature="e#7767#7917#0" expanded="false" />
-                <element signature="e#7964#8874#0" expanded="false" />
-                <element signature="e#10277#10291#0" expanded="false" />
+                <element signature="e#7073#7411#0" expanded="false" />
+                <element signature="e#7472#7727#0" expanded="false" />
+                <element signature="e#7782#7932#0" expanded="false" />
+                <element signature="e#7979#8889#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -42,10 +41,22 @@
       <file leaf-file-name="Tools.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1152">
+            <state relative-caret-position="420">
               <caret line="75" column="8" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="23" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XMeans.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assignment_2/XMeans.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1105">
+              <caret line="97" column="29" lean-forward="false" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
+              <folding>
+                <element signature="e#3357#3375#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -137,9 +148,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="428" />
+    <option name="x" value="281" />
     <option name="y" value="23" />
-    <option name="width" value="1091" />
+    <option name="width" value="1402" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -161,6 +172,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -177,7 +189,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -518,13 +529,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="428" y="23" width="1091" height="877" extended-state="0" />
+    <frame x="281" y="23" width="1402" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17083947" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17058824" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23593964" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35805628" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35805628" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -801,16 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assignment_2/XMeans.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="97" column="29" lean-forward="false" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
-          <folding>
-            <element signature="e#3357#3375#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/playground.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="529">
@@ -836,9 +837,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assignment_2/XMeans.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="97" column="29" lean-forward="false" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="29" />
+          <folding>
+            <element signature="e#3357#3375#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1152">
+        <state relative-caret-position="420">
           <caret line="75" column="8" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="23" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
@@ -848,15 +859,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4811">
-          <caret line="41" column="41" lean-forward="false" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="41" />
+        <state relative-caret-position="-2468">
+          <caret line="302" column="42" lean-forward="true" selection-start-line="302" selection-start-column="42" selection-end-line="302" selection-end-column="42" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#7058#7396#0" expanded="false" />
-            <element signature="e#7457#7712#0" expanded="false" />
-            <element signature="e#7767#7917#0" expanded="false" />
-            <element signature="e#7964#8874#0" expanded="false" />
-            <element signature="e#10277#10291#0" expanded="false" />
+            <element signature="e#7073#7411#0" expanded="false" />
+            <element signature="e#7472#7727#0" expanded="false" />
+            <element signature="e#7782#7932#0" expanded="false" />
+            <element signature="e#7979#8889#0" expanded="false" />
           </folding>
         </state>
       </provider>

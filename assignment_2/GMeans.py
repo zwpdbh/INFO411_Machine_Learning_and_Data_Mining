@@ -8,8 +8,7 @@ from sklearn import cluster, datasets, mixture
 from XMeans import XMeans
 from sklearn.metrics import silhouette_score
 import numpy.linalg as LA
-from sklearn.preprocessing import scale
-
+from sklearn.preprocessing import scale, StandardScaler
 
 # for each cluster do the split
 # test if the split cluster fit anderson test
@@ -311,26 +310,16 @@ class GMeans_02:
 
 def demo1():
     X, y = make_blobs(n_samples=200, centers=5, n_features=2, random_state=100)
+    X = StandardScaler().fit_transform(X)
     gm = GMeans_01().fit(X)
     print "found {} centroids".format(len(gm.centroids))
     Tools.draw(X=X, lables=gm.labels, centroids=gm.centroids)
-
-
-# def demo2():
-#     img = Image.open("africa.jpg")
-#     img = ImageOps.fit(img, (200, 100), Image.ANTIALIAS)
-#     # img.show()
-#
-#     pix = np.array(img)[:, :, 0:3]
-#     pix = pix.reshape((-1, 3)).astype(float)
-#
-#     gm = GMeans().fit(pix)
-#     print len(gm.centroids)
 
 def demo3():
     # Anisotropicly distributed data
     random_state = 170
     X, y = datasets.make_blobs(n_samples=1000, centers=7, n_features=2, random_state=random_state)
+    X = StandardScaler().fit_transform(X)
 
     transformation = [[0.6, -0.6], [-0.4, 0.8]]
     X_aniso = np.dot(X, transformation)
@@ -346,6 +335,7 @@ def demo3():
 def demo_XMean():
     random_state = 170
     X, y = datasets.make_blobs(n_samples=1000, centers=7, n_features=2, random_state=random_state)
+    X = StandardScaler().fit_transform(X)
     xm = XMeans()
     xm = xm.fit(X)
 
@@ -366,6 +356,7 @@ def summary(n_samples, min_n_clusters, max_n_clusters, n_features, random_state=
             n_cluster = n_cluster.astype(int)
             X, y = datasets.make_blobs(n_samples=n_samples, n_features=n_features, centers=n_cluster,
                                        random_state=random_state)
+            X = StandardScaler().fit_transform(X)
             gm_01 = GMeans_01().fit(X)
             gm_02 = GMeans_02().fit(X)
             xm = XMeans().fit(X)
@@ -398,7 +389,7 @@ def comparison_gm(n_samples, n_clusters, n_features, random_state):
     fig.canvas.set_window_title("3 results from g-means, when n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
 
     X, y = datasets.make_blobs(n_samples, n_features, centers=n_clusters, random_state=random_state)
-
+    X = StandardScaler().fit_transform(X)
     pl.subplot(221)
     Tools.draw(X, y)
     # Tools.draw(X, km.labels_, km.cluster_centers_, "k-means")
@@ -428,7 +419,7 @@ def comparison(n_samples, n_clusters, n_features, random_state):
     fig.canvas.set_window_title("n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
 
     X, y = datasets.make_blobs(n_samples, n_features, centers=n_clusters, random_state=random_state)
-
+    X = StandardScaler().fit_transform(X)
 
     pl.subplot(221)
     Tools.draw(X, y)
@@ -459,7 +450,7 @@ def comparion_mixture_models(n_samples, n_clusters, random_state):
     fig.canvas.set_window_title("compare k-means, g-means and x-means in mixture model situation")
 
     X, y = make_blobs(n_samples=n_samples, random_state=random_state, centers=n_clusters)
-
+    X = StandardScaler().fit_transform(X)
 
     transformation = [[0.60834549, -0.63667341], [-0.40887718, 0.85253229]]
     X = np.dot(X, transformation)
@@ -498,7 +489,7 @@ def plot_summary():
 
 
     # sampling
-    n_features = 4
+    n_features = 8
     n_samples = 2000
     random_state = 0
     gm_01, gm_02, xm = summary(n_samples, min_n_cluster, max_n_cluster, n_features=n_features, random_state=random_state,
@@ -530,11 +521,11 @@ if __name__ == '__main__':
     # show_different_clusters_with_k_means()
     # show_different_clusters_with_g_means()
 
-    # plot()
+    plot_summary()
 
     # comparison(n_clusters=10, n_samples=2300, n_features=2, random_state=0)
     # comparison_gm(n_clusters=10, n_samples=2300, n_features=2, random_state=100)
 
-    comparion_mixture_models(n_samples=800, n_clusters=5, random_state=50)
+    # comparion_mixture_models(n_samples=800, n_clusters=5, random_state=50)
 
 
