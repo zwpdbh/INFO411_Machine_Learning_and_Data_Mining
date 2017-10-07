@@ -60,7 +60,7 @@ class Tools:
                 plt.scatter(each[0], each[1], s=1, c=colors[label % len(colors)])
 
     @staticmethod
-    def draw(X, lables, centroids, title):
+    def draw(X, lables, centroids=[], title=None):
         Ys = np.array([[4, 8, 12, 16],
                        [1, 4, 9, 16],
                        [17, 10, 13, 18],
@@ -74,11 +74,13 @@ class Tools:
 
         colors = cm.rainbow(np.linspace(0, 1, len(Ys)))
         fig = plt.gcf()
-        fig.canvas.set_window_title(title)
+        if title != None:
+            fig.canvas.set_window_title(title)
 
         # draw centroid
-        for c in centroids:
-            plt.plot(c[0], c[1], 'ro')
+        if len(centroids) > 0:
+            for c in centroids:
+                plt.plot(c[0], c[1], 'ro')
 
         # draw each point
         for i in range(len(lables)):
@@ -86,4 +88,5 @@ class Tools:
             label = lables[i]
             plt.scatter(p[0], p[1], s=1, c=colors[label % len(colors)])
 
-        print "use {}, we found {} clusters".format(title, len(centroids))
+        if title != None:
+            print "use {}, we found {} clusters".format(title, len(centroids))

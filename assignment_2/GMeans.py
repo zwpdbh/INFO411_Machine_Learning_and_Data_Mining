@@ -393,41 +393,39 @@ def summary(n_samples, min_n_clusters, max_n_clusters, n_features, random_state=
 
 
 
-def show_different_clusters_with_g_means():
+def comparison(n_samples, n_clusters, n_features, random_state):
     pl.figure(figsize=(8, 8))
+    fig = pl.gcf()
+    fig.canvas.set_window_title("n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
 
-    n_samples = 1500
-    random_state = 170
-    X, y = make_blobs(n_samples=n_samples, random_state=random_state)
+    X, y = datasets.make_blobs(n_samples, n_features, centers=n_clusters, random_state=random_state)
 
-    # Different variance
-    X_varied, y_varied = make_blobs(n_samples=n_samples,
-                                    cluster_std=[1.0, 2.5, 0.5],
-                                    random_state=random_state)
-    y_pred = KMeans(n_clusters=3, random_state=random_state).fit_predict(X_varied)
 
     pl.subplot(221)
-    pl.scatter(X_varied[:, 0], X_varied[:, 1], c=y_pred, s=1)
-    pl.title("Unequal Variance")
-
-    # Unevenly sized blobs
-    X_filtered = np.vstack((X[y == 0][:500], X[y == 1][:100], X[y == 2][:10]))
-    y_pred = KMeans(n_clusters=3,
-                    random_state=random_state).fit_predict(X_filtered)
+    Tools.draw(X, y)
+    # Tools.draw(X, km.labels_, km.cluster_centers_, "k-means")
+    pl.title("Ground Truth: n_clusters = {}".format(n_clusters))
 
     pl.subplot(222)
-    pl.scatter(X_filtered[:, 0], X_filtered[:, 1], c=y_pred, s=1)
-    pl.title("Unevenly Sized Blobs")
+    km = KMeans(n_clusters=n_clusters, random_state=random_state).fit(X)
+    Tools.draw(X, km.labels_, km.cluster_centers_)
+    pl.title("Using K-means with n_clusters = {}".format(n_clusters))
 
-    # use g-means
-    gm = GMeans_01().fit(X_varied)
     pl.subplot(223)
-    Tools.draw(X_varied, gm.labels, gm.centroids, "title")
+    gm = GMeans_01().fit(X)
+    Tools.draw(X, gm.labels, gm.centroids)
+    pl.title("G-means: n_clusters = {}".format(len(gm.centroids)))
+
+    pl.subplot(224)
+    xm = XMeans().fit(X)
+    Tools.draw(X, xm.labels_, xm.cluster_centers_)
+    pl.title("X-means: n_clusters = {}".format(len(xm.cluster_centers_)))
+
 
     pl.show()
 
 
-def plot():
+def plot_summary():
     # run different set of data to draw graph
     # prepare settings
     min_n_cluster = 3
@@ -441,8 +439,13 @@ def plot():
     # sampling
     n_features = 4
     n_samples = 2000
-    gm_01, gm_02, xm = summary(n_samples, min_n_cluster, max_n_cluster, n_features=n_features, random_state=0,
+    random_state = 0
+    gm_01, gm_02, xm = summary(n_samples, min_n_cluster, max_n_cluster, n_features=n_features, random_state=random_state,
                          n_loops=n_loops)
+
+    fig = pl.gcf()
+    fig.canvas.set_window_title(
+        "n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
 
     pl.plot(indexes, gm_01, label="gm_01_n_feature = {}, n_samples = {}".format(n_features, n_samples))
     pl.plot(indexes, gm_02, label="gm_02_n_feature = {}, n_samples = {}".format(n_features, n_samples))
@@ -466,8 +469,9 @@ if __name__ == '__main__':
     # show_different_clusters_with_k_means()
     # show_different_clusters_with_g_means()
 
-    plot()
+    # plot()
 
+    comparison(n_clusters=3, n_samples=500, n_features=2, random_state=100)
 
 
 
