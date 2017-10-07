@@ -392,6 +392,35 @@ def summary(n_samples, min_n_clusters, max_n_clusters, n_features, random_state=
     return gm_01_scores, gm_02_scores, xm_scores
 
 
+def comparison_gm(n_samples, n_clusters, n_features, random_state):
+    pl.figure(figsize=(8, 8))
+    fig = pl.gcf()
+    fig.canvas.set_window_title("3 results from g-means, when n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
+
+    X, y = datasets.make_blobs(n_samples, n_features, centers=n_clusters, random_state=random_state)
+
+    pl.subplot(221)
+    Tools.draw(X, y)
+    # Tools.draw(X, km.labels_, km.cluster_centers_, "k-means")
+    pl.title("Ground Truth: n_clusters = {}".format(n_clusters))
+
+    pl.subplot(222)
+    gm_01 = GMeans_01().fit(X)
+    Tools.draw(X, gm_01.labels, gm_01.centroids)
+    pl.title("G-means: n_clusters = {}".format(len(gm_01.centroids)))
+
+    pl.subplot(223)
+    gm_02 = GMeans_01().fit(X)
+    Tools.draw(X, gm_02.labels, gm_02.centroids)
+    pl.title("G-means: n_clusters = {}".format(len(gm_02.centroids)))
+
+    pl.subplot(224)
+    gm_03 = GMeans_01().fit(X)
+    Tools.draw(X, gm_03.labels, gm_03.centroids)
+    pl.title("G-means: n_clusters = {}".format(len(gm_03.centroids)))
+
+
+    pl.show()
 
 def comparison(n_samples, n_clusters, n_features, random_state):
     pl.figure(figsize=(8, 8))
@@ -471,7 +500,8 @@ if __name__ == '__main__':
 
     # plot()
 
-    comparison(n_clusters=3, n_samples=500, n_features=2, random_state=100)
+    # comparison(n_clusters=10, n_samples=2300, n_features=2, random_state=0)
+    comparison_gm(n_clusters=10, n_samples=2300, n_features=2, random_state=100)
 
 
 
