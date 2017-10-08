@@ -1,0 +1,14 @@
+((*- extends 'article.tplx' -*))
+
+((* block author *))
+\author{zhao wei}
+((* endblock author*))
+
+((* block title *))
+\title{My paper Name}
+((* endblock title*))
+
+((* block bibliography *))
+\bibliographystle{unsrt}
+\bibliography{jupyter}
+((* endblock bibliography *))

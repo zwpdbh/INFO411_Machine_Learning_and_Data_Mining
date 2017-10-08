@@ -1,0 +1,1602 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    
+\title{My paper Name}
+
+    
+    
+\author{zhao wei}
+
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Our Implementation}\label{our-implementation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{numpy.linalg} \PY{k+kn}{as} \PY{n+nn}{LA}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.cm} \PY{k+kn}{as} \PY{n+nn}{cm}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k+kn}{import} \PY{n}{stats}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.cluster} \PY{k+kn}{import} \PY{n}{KMeans}
+        
+        \PY{k+kn}{from} \PY{n+nn}{scipy.stats} \PY{k+kn}{import} \PY{n}{anderson}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.datasets.samples\PYZus{}generator} \PY{k+kn}{import} \PY{n}{make\PYZus{}blobs}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k+kn}{import} \PY{n}{cluster}\PY{p}{,} \PY{n}{datasets}\PY{p}{,} \PY{n}{mixture}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.metrics} \PY{k+kn}{import} \PY{n}{silhouette\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.preprocessing} \PY{k+kn}{import} \PY{n}{scale}\PY{p}{,} \PY{n}{StandardScaler}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} simple helper class contains useful method to draw shape}
+         \PY{k}{class} \PY{n+nc}{Tools}\PY{p}{:}
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{drawCentroids}\PY{p}{(}\PY{n}{centroids}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{centroids}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{drawDataSet}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{symbol}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{symbol}\PY{p}{)}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{distBetween}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{b}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{generateSomeData}\PY{p}{(}\PY{n}{start}\PY{p}{,} \PY{n}{end}\PY{p}{,} \PY{n}{numbers}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{pass}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{exchange\PYZus{}binary\PYZus{}image\PYZus{}white\PYZus{}black}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} img is an binary img}
+                 \PY{n}{img} \PY{o}{=} \PY{n}{img}\PY{o}{.}\PY{n}{convert}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{L}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{pixels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+                 \PY{n}{threshold} \PY{o}{=} \PY{l+m+mi}{100}
+         
+                 \PY{n}{rows} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pixels}\PY{p}{)}
+                 \PY{n}{cols} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pixels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{rows}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{cols}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{if} \PY{n}{pixels}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{:}
+                             \PY{n}{pixels}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                         \PY{k}{else}\PY{p}{:}
+                             \PY{n}{pixels}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{255}
+         
+                 \PY{k}{return} \PY{n}{pixels}
+         
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{drawClusters}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{Ys} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{colors} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{Ys}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{label} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{each} \PY{o+ow}{in} \PY{n}{clusters}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{p}{:}
+                         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{each}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{each}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{colors}\PY{p}{[}\PY{n}{label} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{colors}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n+nd}{@staticmethod}
+             \PY{k}{def} \PY{n+nf}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{lables}\PY{p}{,} \PY{n}{centroids}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n}{interim\PYZus{}centers}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{Ys} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{colors} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{rainbow}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{Ys}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{title} \PY{o}{!=} \PY{n+nb+bp}{None}\PY{p}{:}
+                     \PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{set\PYZus{}window\PYZus{}title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} draw centroid}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{centroids}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{centroids}\PY{p}{:}
+                         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{c}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                         
+         \PY{c+c1}{\PYZsh{}         \PYZsh{} if want to show all the centroids generated during spliting}
+         \PY{c+c1}{\PYZsh{}         if interim\PYZus{}centers != None:}
+         \PY{c+c1}{\PYZsh{}             if len(interim\PYZus{}centers) \PYZgt{} 0:}
+         \PY{c+c1}{\PYZsh{}                 for c in interim\PYZus{}centers:}
+         \PY{c+c1}{\PYZsh{}                     plt.plot(c[0], c[1], \PYZsq{}g*\PYZsq{})}
+         
+         
+                 \PY{c+c1}{\PYZsh{} draw each point}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{lables}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{p} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                     \PY{n}{label} \PY{o}{=} \PY{n}{lables}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{p}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{colors}\PY{p}{[}\PY{n}{label} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{colors}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{k}{if} \PY{n}{title} \PY{o}{!=} \PY{n+nb+bp}{None}\PY{p}{:}
+                     \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{use \PYZob{}\PYZcb{}, k = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{title}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} This Xmeans implementation is copied from other people\PYZsq{}s work from GitHub}
+        \PY{k}{class} \PY{n+nc}{XMeans}\PY{p}{(}\PY{n}{KMeans}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{k\PYZus{}init} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{k\PYZus{}means\PYZus{}args}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{k\PYZus{}init} \PY{o}{=} \PY{n}{k\PYZus{}init}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{k\PYZus{}means\PYZus{}args} \PY{o}{=} \PY{n}{k\PYZus{}means\PYZus{}args}
+        
+            \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                \PY{n}{km} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{k\PYZus{}init}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{k\PYZus{}means\PYZus{}args}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recrucive\PYZus{}clustering}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}
+                \PY{k}{return} \PY{n+nb+bp}{self}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}recrucive\PYZus{}clustering}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{labelset}\PY{p}{,} \PY{n}{splits}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{label} \PY{o+ow}{in} \PY{n}{labelset}\PY{p}{:}
+                    \PY{n}{cluster} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{labels} \PY{o}{==} \PY{n}{label}\PY{p}{]}
+                    \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cluster}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{3}\PY{p}{:} \PY{k}{continue}
+                    \PY{n}{km} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{k\PYZus{}means\PYZus{}args}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{cluster}\PY{p}{)}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recrucive\PYZus{}decision}\PY{p}{(}\PY{n}{cluster}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{n}{label}\PY{p}{]} \PY{o}{=} \PY{n}{km}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{[}\PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{splits}
+                        \PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{[}\PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{label}
+                        \PY{n}{labels}\PY{p}{[}\PY{n}{labels} \PY{o}{==} \PY{n}{label}\PY{p}{]}\PY{p}{,} \PY{n}{splits} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recrucive\PYZus{}clustering}\PY{p}{(}\PY{n}{cluster}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{p}{[}\PY{n}{label}\PY{p}{,} \PY{n}{splits}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{splits}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{k}{return} \PY{n}{labels}\PY{p}{,} \PY{n}{splits}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}recrucive\PYZus{}decision}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{cluster}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{centers}\PY{p}{)}\PY{p}{:}
+                \PY{n}{samples} \PY{o}{=} \PY{n}{cluster}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{parameters} \PY{o}{=} \PY{n}{cluster}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{cluster}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}
+                \PY{n}{bic} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}bic}\PY{p}{(}\PY{n}{cluster}\PY{p}{,} \PY{n+nb+bp}{None}\PY{p}{,} \PY{n}{samples}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}
+                \PY{n}{new\PYZus{}bic} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}bic}\PY{p}{(}\PY{n}{cluster}\PY{p}{[}\PY{n}{labels} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{cluster}\PY{p}{[}\PY{n}{labels} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{samples}\PY{p}{,} \PY{n}{parameters}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                \PY{k}{return} \PY{n}{bic} \PY{o}{\PYZgt{}} \PY{n}{new\PYZus{}bic}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}bic}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{cluster\PYZus{}0}\PY{p}{,} \PY{n}{cluster\PYZus{}1}\PY{p}{,} \PY{n}{samples}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{cluster\PYZus{}1} \PY{o+ow}{is} \PY{o+ow}{not} \PY{n+nb+bp}{None}\PY{p}{:}
+                    \PY{n}{alpha} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}model\PYZus{}likelihood}\PY{p}{(}\PY{n}{cluster\PYZus{}0}\PY{p}{,} \PY{n}{cluster\PYZus{}1}\PY{p}{)}
+                    \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.0} \PY{o}{*} \PY{p}{(}\PY{n}{samples} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{alpha}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}log\PYZus{}likelihood}\PY{p}{(}\PY{n}{cluster\PYZus{}0}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}log\PYZus{}likelihood}\PY{p}{(}\PY{n}{cluster\PYZus{}1}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{parameters} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{samples}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.0} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}log\PYZus{}likelihood}\PY{p}{(}\PY{n}{cluster\PYZus{}0}\PY{p}{)} \PY{o}{+} \PY{n}{parameters} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{samples}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}model\PYZus{}likelihood}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{cluster\PYZus{}0}\PY{p}{,} \PY{n}{cluster\PYZus{}1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{mu\PYZus{}0}\PY{p}{,} \PY{n}{mu\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cluster\PYZus{}0}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cluster\PYZus{}1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{n}{sigma\PYZus{}0}\PY{p}{,} \PY{n}{sigma\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{cluster\PYZus{}0}\PY{o}{.}\PY{n}{T}\PY{p}{)} \PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{cluster\PYZus{}1}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                \PY{n}{det\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{sigma\PYZus{}0}\PY{p}{)} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cluster\PYZus{}0}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1} \PY{k}{else} \PY{l+m+mf}{0.0}
+                \PY{n}{det\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{sigma\PYZus{}1}\PY{p}{)} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cluster\PYZus{}1}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1} \PY{k}{else} \PY{l+m+mf}{0.0}
+                \PY{n}{beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{mu\PYZus{}0} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}1}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{det\PYZus{}0} \PY{o}{+} \PY{n}{det\PYZus{}1}\PY{p}{)}
+                \PY{k}{return} \PY{l+m+mf}{0.5} \PY{o}{/} \PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{beta}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}log\PYZus{}likelihood}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{cluster}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cluster}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:} \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{)}
+                \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cluster}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{n}{sigma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{cluster}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                \PY{k}{try}\PY{p}{:}
+                    \PY{n}{log\PYZus{}likehood} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{logpdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{cluster}\PY{p}{)}
+                \PY{k}{except} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{LinAlgError} \PY{k}{as} \PY{n}{err}\PY{p}{:}
+                    \PY{n}{sigma} \PY{o}{=} \PY{n}{sigma} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{sigma}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{log\PYZus{}likehood} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{logpdf}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{cluster}\PY{p}{)}
+                \PY{k}{return} \PY{n}{log\PYZus{}likehood}
+        
+            \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels\PYZus{}}
+        
+            \PY{k}{def} \PY{n+nf}{fit\PYZus{}predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} This is our first version of G\PYZhy{}means, which during the split part, init=\PYZsq{}k\PYZhy{}means++\PYZsq{}}
+        \PY{k}{class} \PY{n+nc}{GMeans\PYZus{}01}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{strictlevel}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stricklevel} \PY{o}{=} \PY{n}{strictlevel}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{clusters} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X} \PY{o}{=} \PY{n+nb+bp}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}result} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interim\PYZus{}centroids} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}recursive\PYZus{}cluster\PYZus{}index}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{indexes}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{indexes}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                    \PY{k}{return}
+                \PY{n}{original\PYZus{}indexes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{indexes}\PY{p}{:}
+                    \PY{n}{original\PYZus{}indexes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+        
+                \PY{n}{centroid} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} no intialize centroid, just use k++}
+                \PY{n}{km} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{KMeans}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{dataSet}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X}\PY{p}{,} \PY{n}{index\PYZus{}records}\PY{o}{=}\PY{n}{indexes}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interim\PYZus{}centroids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{c\PYZus{}0}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{interim\PYZus{}centroids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{c\PYZus{}1}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{v} \PY{o}{=} \PY{n}{km}\PY{o}{.}\PY{n}{c\PYZus{}0} \PY{o}{\PYZhy{}} \PY{n}{km}\PY{o}{.}\PY{n}{c\PYZus{}1}
+        
+                \PY{n}{X\PYZus{}prime} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}X\PYZus{}prime}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{,} \PY{n}{v}\PY{p}{)}
+                \PY{n}{accept\PYZus{}split} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{checkAnderson}\PY{p}{(}\PY{n}{X\PYZus{}prime}\PY{p}{)}
+        
+                \PY{k}{if} \PY{n}{accept\PYZus{}split}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} km.cluster\PYZus{}0 should be the index\PYZus{}records}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recursive\PYZus{}cluster\PYZus{}index}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}0}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recursive\PYZus{}cluster\PYZus{}index}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}1}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{centroid}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}result}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{original\PYZus{}indexes}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} self.index\PYZus{}records = np.asarray(self.index\PYZus{}records)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recursive\PYZus{}cluster\PYZus{}index}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} print len(self.centroids), type(self.centroids)}
+                \PY{c+c1}{\PYZsh{} print len(self.index\PYZus{}result), type(self.index\PYZus{}result)}
+                \PY{c+c1}{\PYZsh{} generate lables}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records}\PY{p}{)}\PY{p}{)}
+                \PY{k}{for} \PY{n}{label} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}result}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{each} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}result}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{n}{each}\PY{p}{]} \PY{o}{=} \PY{n}{label}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+                \PY{k}{return} \PY{n+nb+bp}{self}
+        
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}X\PYZus{}prime}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{v}\PY{p}{)}\PY{p}{:}
+                \PY{n}{X\PYZus{}copy} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} normalize v, need?}
+                \PY{n}{v} \PY{o}{=} \PY{n}{v} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{v}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{v}\PY{p}{)}
+                \PY{n}{X\PYZus{}prime} \PY{o}{=} \PY{n}{scale}\PY{p}{(}\PY{n}{X\PYZus{}copy}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{v}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{v}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+                \PY{k}{return} \PY{n}{X\PYZus{}prime}
+        
+            \PY{k}{def} \PY{n+nf}{checkAnderson}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                \PY{n}{X} \PY{o}{=} \PY{n}{X} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                \PY{n}{output} \PY{o}{=} \PY{n}{anderson}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                \PY{n}{statistic} \PY{o}{=} \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{critical\PYZus{}value} \PY{o}{=} \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stricklevel}\PY{p}{]}
+                \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{statistic}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{n+nb+bp}{False}
+        
+                \PY{c+c1}{\PYZsh{} print statistic, critical\PYZus{}value}
+                \PY{k}{if} \PY{n}{statistic} \PY{o}{\PYZgt{}} \PY{n}{critical\PYZus{}value}\PY{p}{:}
+                    \PY{k}{return} \PY{n+nb+bp}{True}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{n+nb+bp}{False}
+        
+            \PY{c+c1}{\PYZsh{} inner class for doing the K\PYZhy{}Means clustering}
+            \PY{k}{class} \PY{n+nc}{KMeans}\PY{p}{:}
+                \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}0} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}0} \PY{o}{=} \PY{n+nb+bp}{None}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{None}
+        
+                \PY{k}{def} \PY{n+nf}{split}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{dataSet}\PY{p}{,} \PY{n}{index\PYZus{}records}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} print \PYZdq{}\PYZbs{}nindex\PYZus{}records length = \PYZob{}\PYZcb{}\PYZdq{}.format(len(index\PYZus{}records))}
+                    \PY{c+c1}{\PYZsh{} print \PYZdq{}index\PYZus{}records = \PYZob{}\PYZcb{}\PYZdq{}.format(index\PYZus{}records)}
+                    \PY{c+c1}{\PYZsh{} print \PYZdq{}in gm\PYZus{}01, we use k\PYZhy{}mean++ to initialize\PYZdq{}}
+                    \PY{n}{kM} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{init}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k\PYZhy{}means++}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{dataSet}\PY{p}{[}\PY{n}{index\PYZus{}records}\PY{p}{]}\PY{p}{)}
+        
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}0} \PY{o}{=} \PY{n}{kM}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}1} \PY{o}{=} \PY{n}{kM}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        
+                    \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{index\PYZus{}records}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{kM}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index\PYZus{}records}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+                        \PY{k}{else}\PY{p}{:}
+                            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index\PYZus{}records}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+        
+                    \PY{k}{return} \PY{n+nb+bp}{self}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} This is our second version of G\PYZhy{}means, which follows the same procedures the paper used.}
+        \PY{c+c1}{\PYZsh{} Which during the split part, the K\PYZhy{}means algorith use two specified centroids for initialization}
+        \PY{k}{class} \PY{n+nc}{GMeans\PYZus{}02}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{strictlevel}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stricklevel} \PY{o}{=} \PY{n}{strictlevel}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{clusters} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X} \PY{o}{=} \PY{n+nb+bp}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}result} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}recursive\PYZus{}cluster\PYZus{}index}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{indexes}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{indexes}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                    \PY{k}{return}
+                \PY{n}{original\PYZus{}indexes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{indexes}\PY{p}{:}
+                    \PY{n}{original\PYZus{}indexes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+        
+                \PY{n}{centroid} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} compute eigen vector and eigen values}
+                \PY{n}{W0}\PY{p}{,} \PY{n}{ev0} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{powerPCA}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{,} \PY{n}{n\PYZus{}pcs}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{m} \PY{o}{=} \PY{n}{W0} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{ev0} \PY{o}{/} \PY{l+m+mf}{3.1415926}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} c\PYZus{}0, c\PYZus{}1: 2 by 1 matrix}
+                \PY{n}{c\PYZus{}0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{centroid}\PY{p}{)}\PY{o}{.}\PY{n}{getT}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{n}{m}
+                \PY{n}{c\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{centroid}\PY{p}{)}\PY{o}{.}\PY{n}{getT}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{m}
+                \PY{n}{km} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{KMeans}\PY{p}{(}\PY{n}{c\PYZus{}0}\PY{p}{,} \PY{n}{c\PYZus{}1}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{dataSet}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X}\PY{p}{,} \PY{n}{index\PYZus{}records}\PY{o}{=}\PY{n}{indexes}\PY{p}{)}
+                \PY{n}{v} \PY{o}{=} \PY{n}{km}\PY{o}{.}\PY{n}{c\PYZus{}0} \PY{o}{\PYZhy{}} \PY{n}{km}\PY{o}{.}\PY{n}{c\PYZus{}1}
+        
+                \PY{n}{X\PYZus{}prime} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}X\PYZus{}prime}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{,} \PY{n}{v}\PY{p}{)}
+        
+                \PY{n}{accept\PYZus{}split} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{checkAnderson}\PY{p}{(}\PY{n}{X\PYZus{}prime}\PY{p}{)}
+        
+                \PY{k}{if} \PY{n}{accept\PYZus{}split}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} km.cluster\PYZus{}0 should be the index\PYZus{}records}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recursive\PYZus{}cluster\PYZus{}index}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}0}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recursive\PYZus{}cluster\PYZus{}index}\PY{p}{(}\PY{n}{km}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}1}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{centroid}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}result}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{original\PYZus{}indexes}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} self.index\PYZus{}records = np.asarray(self.index\PYZus{}records)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}recursive\PYZus{}cluster\PYZus{}index}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} print len(self.centroids), type(self.centroids)}
+                \PY{c+c1}{\PYZsh{} print len(self.index\PYZus{}result), type(self.index\PYZus{}result)}
+                \PY{c+c1}{\PYZsh{} generate lables}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records}\PY{p}{)}\PY{p}{)}
+                \PY{k}{for} \PY{n}{label} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}result}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{each} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}result}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels}\PY{p}{[}\PY{n}{each}\PY{p}{]} \PY{o}{=} \PY{n}{label}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+                \PY{k}{return} \PY{n+nb+bp}{self}
+        
+            \PY{k}{def} \PY{n+nf}{get\PYZus{}X\PYZus{}prime}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{v}\PY{p}{)}\PY{p}{:}
+                \PY{n}{X\PYZus{}copy} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} normalize v, need?}
+                \PY{n}{v} \PY{o}{=} \PY{n}{v} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{v}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{v}\PY{p}{)}
+                \PY{n}{X\PYZus{}prime} \PY{o}{=} \PY{n}{scale}\PY{p}{(}\PY{n}{X\PYZus{}copy}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{v}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{v}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{v}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+                \PY{k}{return} \PY{n}{X\PYZus{}prime}
+        
+                \PY{c+c1}{\PYZsh{} X\PYZus{}prime = (X * v).tolist()}
+                \PY{c+c1}{\PYZsh{} tmp = []}
+                \PY{c+c1}{\PYZsh{} for each in X\PYZus{}prime:}
+                \PY{c+c1}{\PYZsh{}     tmp.append(each[0])}
+                \PY{c+c1}{\PYZsh{}}
+                \PY{c+c1}{\PYZsh{} return tmp}
+        
+            \PY{k}{def} \PY{n+nf}{checkAnderson}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                \PY{n}{X} \PY{o}{=} \PY{n}{X} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                \PY{n}{output} \PY{o}{=} \PY{n}{anderson}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                \PY{n}{statistic} \PY{o}{=} \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{critical\PYZus{}value} \PY{o}{=} \PY{n}{output}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{stricklevel}\PY{p}{]}
+                \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{statistic}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{n+nb+bp}{False}
+        
+                \PY{c+c1}{\PYZsh{} print statistic, critical\PYZus{}value}
+                \PY{k}{if} \PY{n}{statistic} \PY{o}{\PYZgt{}} \PY{n}{critical\PYZus{}value}\PY{p}{:}
+                    \PY{k}{return} \PY{n+nb+bp}{True}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{n+nb+bp}{False}
+        
+            \PY{c+c1}{\PYZsh{} Power method}
+            \PY{k}{def} \PY{n+nf}{power\PYZus{}iterations}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{:}
+                \PY{k}{while} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{w1} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{w} \PY{o}{=} \PY{n}{R} \PY{o}{*} \PY{n}{w}
+                    \PY{n}{w} \PY{o}{/}\PY{o}{=} \PY{n}{LA}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{converged}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{w1}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{break}
+                \PY{k}{return} \PY{n}{w}
+        
+                \PY{c+c1}{\PYZsh{} test whether two normalized vectors are the same (or deviation within a threshold)}
+        
+            \PY{k}{def} \PY{n+nf}{converged}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{w1}\PY{p}{,} \PY{n}{thres}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}10}\PY{p}{)}\PY{p}{:}
+                \PY{n}{converged} \PY{o}{=} \PY{n+nb+bp}{False}
+                \PY{n}{corr} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{w1}
+                \PY{c+c1}{\PYZsh{} print corr}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{corr}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{thres}\PY{p}{:}
+                    \PY{n}{converged} \PY{o}{=} \PY{n+nb+bp}{True}
+                \PY{k}{return} \PY{n}{converged}
+        
+            \PY{k}{def} \PY{n+nf}{powerPCA}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{n\PYZus{}pcs}\PY{p}{)}\PY{p}{:}
+                \PY{n}{nr}\PY{p}{,} \PY{n}{dim} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{shape}
+                \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{n}{R} \PY{o}{=} \PY{p}{(}\PY{n}{X} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{p}{(}\PY{n}{X} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{nr} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.0}\PY{p}{)}
+                \PY{n}{R0} \PY{o}{=} \PY{n}{R}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} initialize}
+                \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{dim}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+                \PY{n}{w} \PY{o}{/}\PY{o}{=} \PY{n}{LA}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} iterate for 1st eigenvector}
+                \PY{n}{w} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{power\PYZus{}iterations}\PY{p}{(}\PY{n}{R}\PY{p}{,} \PY{n}{w}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} first eigenvector as first column of W}
+                \PY{n}{W} \PY{o}{=} \PY{n}{w}
+                \PY{c+c1}{\PYZsh{} iterate for other eigenvectors}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}pcs}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} deflate R}
+                    \PY{n}{R} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{w} \PY{o}{*} \PY{n}{w}\PY{o}{.}\PY{n}{T} \PY{o}{*} \PY{n}{R}
+                    \PY{c+c1}{\PYZsh{} initialize and Power iter}
+                    \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{dim}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+                    \PY{n}{w} \PY{o}{/}\PY{o}{=} \PY{n}{LA}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{w}\PY{p}{)}
+                    \PY{n}{w} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{power\PYZus{}iterations}\PY{p}{(}\PY{n}{R}\PY{p}{,} \PY{n}{w}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{} attach the new eigenvector to W as a new column}
+                    \PY{n}{W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{W}\PY{p}{,} \PY{n}{w}\PY{p}{]}
+        
+                \PY{c+c1}{\PYZsh{} get eigenvalues and save them in the ev array}
+                \PY{n}{y} \PY{o}{=} \PY{n}{R0} \PY{o}{*} \PY{n}{W}
+                \PY{n}{ev} \PY{o}{=} \PY{n}{LA}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{o}{/} \PY{n}{LA}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{W}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{k}{return} \PY{n}{W}\PY{p}{,} \PY{n}{ev}
+        
+            \PY{c+c1}{\PYZsh{} inner class for doing the K\PYZhy{}Means clustering}
+            \PY{k}{class} \PY{n+nc}{KMeans}\PY{p}{:}
+                \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{c\PYZus{}0}\PY{p}{,} \PY{n}{c\PYZus{}1}\PY{p}{)}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{centroids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}0} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}0} \PY{o}{=} \PY{n}{c\PYZus{}0}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}1} \PY{o}{=} \PY{n}{c\PYZus{}1}
+        
+                \PY{k}{def} \PY{n+nf}{split}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{dataSet}\PY{p}{,} \PY{n}{index\PYZus{}records}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} print \PYZdq{}\PYZbs{}nindex\PYZus{}records length = \PYZob{}\PYZcb{}\PYZdq{}.format(len(index\PYZus{}records))}
+                    \PY{c+c1}{\PYZsh{} print \PYZdq{}index\PYZus{}records = \PYZob{}\PYZcb{}\PYZdq{}.format(index\PYZus{}records)}
+                    \PY{n}{c0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}0}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{c1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}1}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{initial\PYZus{}centroids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{(}\PY{n}{c0}\PY{p}{,} \PY{n}{c1}\PY{p}{)}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{} print \PYZdq{}in gm\PYZus{}02, we use initial\PYZus{}centroids to initialize\PYZdq{}}
+                    \PY{n}{kM} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{init}\PY{o}{=}\PY{n}{initial\PYZus{}centroids}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{dataSet}\PY{p}{[}\PY{n}{index\PYZus{}records}\PY{p}{]}\PY{p}{)}
+        
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}0} \PY{o}{=} \PY{n}{kM}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{c\PYZus{}1} \PY{o}{=} \PY{n}{kM}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        
+                    \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{index\PYZus{}records}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{kM}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}0}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index\PYZus{}records}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+                        \PY{k}{else}\PY{p}{:}
+                            \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{index\PYZus{}records\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index\PYZus{}records}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+        
+                    \PY{k}{return} \PY{n+nb+bp}{self}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} contains some helper methods to do the experiments}
+         \PY{k}{def} \PY{n+nf}{demo1}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{found \PYZob{}\PYZcb{} centroids}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{o}{=}\PY{n}{X}\PY{p}{,} \PY{n}{lables}\PY{o}{=}\PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{centroids}\PY{o}{=}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{demo3}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Anisotropicly distributed data}
+             \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{170}
+             \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{)}
+             \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+             \PY{n}{transformation} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.6}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.6}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{]}\PY{p}{]}
+             \PY{n}{X\PYZus{}aniso} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{transformation}\PY{p}{)}
+         
+             \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}02}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}aniso}\PY{p}{)}
+         
+             \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{found \PYZob{}\PYZcb{} clusters}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{clusters}\PY{p}{)}\PY{p}{)}
+             \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{found \PYZob{}\PYZcb{} centroids}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{drawCentroids}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{drawClusters}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{clusters}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{demo\PYZus{}XMean}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{170}
+             \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{)}
+             \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{xm} \PY{o}{=} \PY{n}{XMeans}\PY{p}{(}\PY{p}{)}
+             \PY{n}{xm} \PY{o}{=} \PY{n}{xm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{o}{=}\PY{n}{X}\PY{p}{,} \PY{n}{lables}\PY{o}{=}\PY{n}{xm}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{centroids}\PY{o}{=}\PY{n}{xm}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{,} \PY{n}{interim\PYZus{}centers}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{summary}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{min\PYZus{}n\PYZus{}clusters}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}clusters}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}loops}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{n}{gm\PYZus{}01\PYZus{}scores} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{gm\PYZus{}02\PYZus{}scores} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{xm\PYZus{}scores} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{k}{for} \PY{n}{n\PYZus{}cluster} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{min\PYZus{}n\PYZus{}clusters}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}clusters}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}clusters} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}n\PYZus{}clusters} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{total\PYZus{}gm\PYZus{}01\PYZus{}score} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{total\PYZus{}gm\PYZus{}02\PYZus{}score} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{total\PYZus{}xm\PYZus{}score} \PY{o}{=} \PY{l+m+mi}{0}
+         
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}loops}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{n\PYZus{}cluster} \PY{o}{=} \PY{n}{n\PYZus{}cluster}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+                     \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}cluster}\PY{p}{,}
+                                                \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{)}
+                     \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+                     \PY{n}{X\PYZus{}1} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{X\PYZus{}2} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{X\PYZus{}3} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         
+                     \PY{n}{gm\PYZus{}01} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{p}{)}
+                     \PY{n}{gm\PYZus{}02} \PY{o}{=} \PY{n}{GMeans\PYZus{}02}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}2}\PY{p}{)}
+                     \PY{n}{xm} \PY{o}{=} \PY{n}{XMeans}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}3}\PY{p}{)}
+         
+                     \PY{n}{gm\PYZus{}01\PYZus{}score} \PY{o}{=} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{p}{,} \PY{n}{gm\PYZus{}01}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{gm\PYZus{}02\PYZus{}score} \PY{o}{=} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X\PYZus{}2}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{xm\PYZus{}score} \PY{o}{=} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X\PYZus{}3}\PY{p}{,} \PY{n}{xm}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} print \PYZdq{}xm = \PYZob{}\PYZcb{}\PYZdq{}.format(xm\PYZus{}score)}
+         
+                     \PY{n}{total\PYZus{}gm\PYZus{}01\PYZus{}score} \PY{o}{+}\PY{o}{=} \PY{n}{gm\PYZus{}01\PYZus{}score}
+                     \PY{n}{total\PYZus{}gm\PYZus{}02\PYZus{}score} \PY{o}{+}\PY{o}{=} \PY{n}{gm\PYZus{}02\PYZus{}score}
+                     \PY{n}{total\PYZus{}xm\PYZus{}score} \PY{o}{+}\PY{o}{=} \PY{n}{xm\PYZus{}score}
+         
+                 \PY{n}{total\PYZus{}gm\PYZus{}01\PYZus{}score} \PY{o}{=} \PY{n}{total\PYZus{}gm\PYZus{}01\PYZus{}score} \PY{o}{/} \PY{p}{(}\PY{n}{n\PYZus{}loops} \PY{o}{*} \PY{l+m+mf}{1.0}\PY{p}{)}
+                 \PY{n}{total\PYZus{}gm\PYZus{}02\PYZus{}score} \PY{o}{=} \PY{n}{total\PYZus{}gm\PYZus{}02\PYZus{}score} \PY{o}{/} \PY{p}{(}\PY{n}{n\PYZus{}loops} \PY{o}{*} \PY{l+m+mf}{1.0}\PY{p}{)}
+                 \PY{n}{total\PYZus{}xm\PYZus{}score} \PY{o}{=} \PY{n}{total\PYZus{}xm\PYZus{}score} \PY{o}{/} \PY{p}{(}\PY{n}{n\PYZus{}loops} \PY{o}{*} \PY{l+m+mf}{1.0}\PY{p}{)}
+         
+                 \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}samples = \PYZob{}\PYZcb{}, n\PYZus{}features = \PYZob{}\PYZcb{}, n\PYZus{}cluster = \PYZob{}\PYZcb{}, gm\PYZus{}01\PYZus{}score = \PYZob{}\PYZcb{}, gm\PYZus{}02\PYZus{}score = \PYZob{}\PYZcb{}, xm\PYZus{}score = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}} \PYZbs{}
+                     \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}cluster}\PY{p}{,} \PY{n}{total\PYZus{}gm\PYZus{}01\PYZus{}score}\PY{p}{,} \PY{n}{total\PYZus{}gm\PYZus{}02\PYZus{}score}\PY{p}{,} \PY{n}{total\PYZus{}xm\PYZus{}score}\PY{p}{)}
+         
+                 \PY{n}{gm\PYZus{}01\PYZus{}scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{total\PYZus{}gm\PYZus{}01\PYZus{}score}\PY{p}{)}
+                 \PY{n}{gm\PYZus{}02\PYZus{}scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{total\PYZus{}gm\PYZus{}02\PYZus{}score}\PY{p}{)}
+                 \PY{n}{xm\PYZus{}scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{total\PYZus{}xm\PYZus{}score}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{gm\PYZus{}01\PYZus{}scores}\PY{p}{,} \PY{n}{gm\PYZus{}02\PYZus{}scores}\PY{p}{,} \PY{n}{xm\PYZus{}scores}
+         
+         
+         \PY{k}{def} \PY{n+nf}{comparison\PYZus{}gm}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{set\PYZus{}window\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{3 results from g\PYZhy{}means, when n\PYZus{}samples = \PYZob{}\PYZcb{}, n\PYZus{}features = \PYZob{}\PYZcb{}, random\PYZus{}state = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{)}
+             \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{221}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Tools.draw(X, km.labels\PYZus{}, km.cluster\PYZus{}centers\PYZus{}, \PYZdq{}k\PYZhy{}means\PYZdq{})}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ground Truth: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{222}\PY{p}{)}
+             \PY{n}{gm\PYZus{}01} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm\PYZus{}01}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm\PYZus{}01}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G\PYZhy{}means: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gm\PYZus{}01}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{223}\PY{p}{)}
+             \PY{n}{gm\PYZus{}02} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G\PYZhy{}means: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gm\PYZus{}02}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{)}
+             \PY{n}{gm\PYZus{}03} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm\PYZus{}03}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm\PYZus{}03}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G\PYZhy{}means: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gm\PYZus{}03}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{comparison\PYZus{}between\PYZus{}k\PYZus{}x\PYZus{}and\PYZus{}g}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{set\PYZus{}window\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{compare K\PYZus{}G\PYZus{}X, n\PYZus{}samples = \PYZob{}\PYZcb{}, n\PYZus{}features = \PYZob{}\PYZcb{}, random\PYZus{}state = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{)}
+             \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{221}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Tools.draw(X, km.labels\PYZus{}, km.cluster\PYZus{}centers\PYZus{}, \PYZdq{}k\PYZhy{}means\PYZdq{})}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ground Truth: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{222}\PY{p}{)}
+             \PY{n}{km} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using K\PYZhy{}means with n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{223}\PY{p}{)}
+             \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G\PYZhy{}means: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{)}
+             \PY{n}{xm} \PY{o}{=} \PY{n}{XMeans}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{xm}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{xm}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X\PYZhy{}means: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xm}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{comparison\PYZus{}between\PYZus{}k\PYZus{}x\PYZus{}and\PYZus{}g\PYZus{}with\PYZus{}shaped\PYZus{}data}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{set\PYZus{}window\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{compare k\PYZhy{}means, g\PYZhy{}means and x\PYZhy{}means in mixture model situation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{)}
+             \PY{n}{X} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+             \PY{n}{transformation} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.60834549}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.63667341}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.40887718}\PY{p}{,} \PY{l+m+mf}{0.85253229}\PY{p}{]}\PY{p}{]}
+             \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{transformation}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{221}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Tools.draw(X, km.labels\PYZus{}, km.cluster\PYZus{}centers\PYZus{}, \PYZdq{}k\PYZhy{}means\PYZdq{})}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ground Truth: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{222}\PY{p}{)}
+             \PY{n}{km} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using K\PYZhy{}means with n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{223}\PY{p}{)}
+             \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{,} \PY{n}{interim\PYZus{}centers}\PY{o}{=}\PY{n}{gm}\PY{o}{.}\PY{n}{interim\PYZus{}centroids}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{G\PYZhy{}means: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{)}
+             \PY{n}{xm} \PY{o}{=} \PY{n}{XMeans}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{xm}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{xm}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X\PYZhy{}means: n\PYZus{}clusters = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xm}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} collect a group of score while changing the number of centers}
+         \PY{k}{def} \PY{n+nf}{collect\PYZus{}silhouette\PYZus{}score\PYZus{}for\PYZus{}gmeans}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{min\PYZus{}n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{3}
+             \PY{n}{max\PYZus{}n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{30}
+             \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{2}
+             \PY{n}{n\PYZus{}samples} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{3000}\PY{p}{,} \PY{l+m+mi}{4000}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{]}
+             \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{n\PYZus{}samples}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{n\PYZus{}cluster} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{min\PYZus{}n\PYZus{}clusters}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}clusters}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}clusters} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}n\PYZus{}clusters} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{n\PYZus{}cluster} \PY{o}{=} \PY{n}{n\PYZus{}cluster}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+                     \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{n}{n}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}cluster}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                   \PY{c+c1}{\PYZsh{}  X = StandardScaler().fit\PYZus{}transform(X)}
+                     \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                     \PY{n}{xm} \PY{o}{=} \PY{n}{XMeans}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                     \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}samples = \PYZob{}\PYZcb{}, n\PYZus{}cluster = \PYZob{}\PYZcb{}, n\PYZus{}features = \PYZob{}\PYZcb{}, G\PYZhy{}means score = \PYZob{}\PYZcb{} }\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{ X means score = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.} \PYZbs{}
+                         \PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{n\PYZus{}cluster}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{xm}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} print \PYZdq{}n\PYZus{}samples = \PYZob{}\PYZcb{}, n\PYZus{}cluster = \PYZob{}\PYZcb{}, G\PYZhy{}means score = \PYZob{}\PYZcb{} \PYZbs{}t X means score = \PYZob{}\PYZcb{}\PYZdq{}. \PYZbs{}}
+                     \PY{c+c1}{\PYZsh{}     format(n, n\PYZus{}cluster,calinski\PYZus{}harabaz\PYZus{}score(X, xm.labels\PYZus{}),calinski\PYZus{}harabaz\PYZus{}score(X, gm.labels))}
+         
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}summary}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} run different set of data to draw graph}
+             \PY{c+c1}{\PYZsh{} prepare settings}
+             \PY{n}{min\PYZus{}n\PYZus{}cluster} \PY{o}{=} \PY{l+m+mi}{3}
+             \PY{n}{max\PYZus{}n\PYZus{}cluster} \PY{o}{=} \PY{l+m+mi}{20}
+             \PY{n}{n\PYZus{}loops} \PY{o}{=} \PY{l+m+mi}{10}
+             \PY{n}{indexes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{min\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}n\PYZus{}cluster} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{indexes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+         
+         
+             \PY{c+c1}{\PYZsh{} sampling}
+             \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{12}
+             \PY{n}{n\PYZus{}samples} \PY{o}{=} \PY{l+m+mi}{1000}
+             \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{gm\PYZus{}01}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{p}{,} \PY{n}{xm} \PY{o}{=} \PY{n}{summary}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{min\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{,}
+                                  \PY{n}{n\PYZus{}loops}\PY{o}{=}\PY{n}{n\PYZus{}loops}\PY{p}{)}
+         
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{set\PYZus{}window\PYZus{}title}\PY{p}{(}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}samples = \PYZob{}\PYZcb{}, n\PYZus{}features = \PYZob{}\PYZcb{}, random\PYZus{}state = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{gm\PYZus{}01}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gm\PYZus{}01\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gm\PYZus{}02\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{xm}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{xm\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Experiment}\label{experiment}
+
+    \subsubsection{Part one, G-means is good: we want to demenstrate that
+G-means can automatically detect the number of
+clusters}\label{part-one-g-means-is-good-we-want-to-demenstrate-that-g-means-can-automatically-detect-the-number-of-clusters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ground truth = \PYZob{}\PYZcb{}, G\PYZhy{}means find k = \PYZob{}\PYZcb{}, silhouette\PYZus{}score = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{,} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g\PYZhy{}means}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Ground truth = 3, G-means find k = 3, silhouette\_score = 0.469030523441
+use g-means, k = 3
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ground truth = \PYZob{}\PYZcb{}, G\PYZhy{}means find k = \PYZob{}\PYZcb{}, silhouette\PYZus{}score = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{,} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g\PYZhy{}means}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Ground truth = 10, G-means find k = 12, silhouette\_score = 0.494800455862
+use g-means, k = 12
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{)}
+         \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ground truth = \PYZob{}\PYZcb{}, G\PYZhy{}means find k = \PYZob{}\PYZcb{}, silhouette\PYZus{}score = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{,} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g\PYZhy{}means}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Ground truth = 10, G-means find k = 9, silhouette\_score = 0.559750953971
+use g-means, k = 9
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Event the k = 9 is not the same as ground truth 10. Silhouette\_score
+becomes higher when the data sets seem more separate from each other
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{n\PYZus{}clusters} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{gm} \PY{o}{=} \PY{n}{GMeans\PYZus{}01}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ground truth = \PYZob{}\PYZcb{}, G\PYZhy{}means find k = \PYZob{}\PYZcb{}, silhouette\PYZus{}score = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{)}\PY{p}{,} \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Tools}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{labels}\PY{p}{,} \PY{n}{gm}\PY{o}{.}\PY{n}{centroids}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g\PYZhy{}means}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Ground truth = 10, G-means find k = 10, silhouette\_score = 0.439171221494
+use g-means, k = 10
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Part two, after we found the G-means seems not stable, we
+do more test to see if it is
+stable}\label{part-two-after-we-found-the-g-means-seems-not-stable-we-do-more-test-to-see-if-it-is-stable}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{comparison\PYZus{}gm}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{comparison\PYZus{}gm}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Still, we found that when the clusters are separated well. The G-means
+can perforace very well \#\#\#\# From part one and two, we can see
+G-means can perform well when the data cluster separate well by
+themselves. But when different clusters get crowed together, G-means
+seems to do over clustering.
+
+    \subsubsection{Part Three: what about their comparision with X-means. In
+paper, G-means is described as can performe better than
+X-means}\label{part-three-what-about-their-comparision-with-x-means.-in-paper-g-means-is-described-as-can-performe-better-than-x-means}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{comparison\PYZus{}between\PYZus{}k\PYZus{}x\PYZus{}and\PYZus{}g}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{2300}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    G-means tend to over cluster the data when the data is not separated
+from each other. When some clusters get crowd together, they do not form
+a spherical shape. In G-means paper, the auther has mentioned that the
+data need to be spherical.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} change random\PYZus{}state=100 to make the cluster seperate from each other}
+         \PY{n}{comparison\PYZus{}between\PYZus{}k\PYZus{}x\PYZus{}and\PYZus{}g}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{2300}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Again, it has proved that: if G-means performs well, each data clusters
+need to be spherical. \#\#\#\# The X-means seems performs stable and
+better than G-means.
+
+    \subsubsection{Part Four: for curiosity, we compare the G-means and
+X-means useing different setting for different round, and collect their
+performance}\label{part-four-for-curiosity-we-compare-the-g-means-and-x-means-useing-different-setting-for-different-round-and-collect-their-performance}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{min\PYZus{}n\PYZus{}cluster} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{max\PYZus{}n\PYZus{}cluster} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{n\PYZus{}loops} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{indexes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{min\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}n\PYZus{}cluster} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{indexes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} sampling}
+         \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{n\PYZus{}samples} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{gm\PYZus{}01}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{p}{,} \PY{n}{xm} \PY{o}{=} \PY{n}{summary}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{min\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{,}
+                              \PY{n}{n\PYZus{}loops}\PY{o}{=}\PY{n}{n\PYZus{}loops}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{set\PYZus{}window\PYZus{}title}\PY{p}{(}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}samples = \PYZob{}\PYZcb{}, n\PYZus{}features = \PYZob{}\PYZcb{}, random\PYZus{}state = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{gm\PYZus{}01}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gm\PYZus{}01\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gm\PYZus{}02\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{xm}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{xm\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+n\_samples = 1000, n\_features = 2, n\_cluster = 3, gm\_01\_score = 0.365994895959, gm\_02\_score = 0.320427421056, xm\_score = 0.473683061999
+n\_samples = 1000, n\_features = 2, n\_cluster = 4, gm\_01\_score = 0.333600416981, gm\_02\_score = 0.38483772085, xm\_score = 0.419323298002
+n\_samples = 1000, n\_features = 2, n\_cluster = 5, gm\_01\_score = 0.394550380913, gm\_02\_score = 0.321111775156, xm\_score = 0.650940922032
+n\_samples = 1000, n\_features = 2, n\_cluster = 6, gm\_01\_score = 0.318849705343, gm\_02\_score = 0.295270730797, xm\_score = 0.417386475896
+n\_samples = 1000, n\_features = 2, n\_cluster = 7, gm\_01\_score = 0.347871997226, gm\_02\_score = 0.3472189176, xm\_score = 0.455537953277
+n\_samples = 1000, n\_features = 2, n\_cluster = 8, gm\_01\_score = 0.462381814266, gm\_02\_score = 0.480651900047, xm\_score = 0.500860982055
+n\_samples = 1000, n\_features = 2, n\_cluster = 9, gm\_01\_score = 0.508419919184, gm\_02\_score = 0.472254569117, xm\_score = 0.564363667828
+n\_samples = 1000, n\_features = 2, n\_cluster = 10, gm\_01\_score = 0.466772174852, gm\_02\_score = 0.469370786203, xm\_score = 0.510548193694
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    gm\_01 is the implementation using init=k-means++ gm\_02 is the
+implementation using specified centroids generated from formula in the
+paper
+
+Ihe result is consistent with our previous result. The X-Means performs
+better than G-means when feature = 2. What about in high dimension?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{min\PYZus{}n\PYZus{}cluster} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{max\PYZus{}n\PYZus{}cluster} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{n\PYZus{}loops} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{indexes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{min\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster} \PY{o}{\PYZhy{}} \PY{n}{min\PYZus{}n\PYZus{}cluster} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{indexes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} sampling}
+         \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{l+m+mi}{20}
+         \PY{n}{n\PYZus{}samples} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{gm\PYZus{}01}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{p}{,} \PY{n}{xm} \PY{o}{=} \PY{n}{summary}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{min\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{max\PYZus{}n\PYZus{}cluster}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{o}{=}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{random\PYZus{}state}\PY{p}{,}
+                              \PY{n}{n\PYZus{}loops}\PY{o}{=}\PY{n}{n\PYZus{}loops}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{set\PYZus{}window\PYZus{}title}\PY{p}{(}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}samples = \PYZob{}\PYZcb{}, n\PYZus{}features = \PYZob{}\PYZcb{}, random\PYZus{}state = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{gm\PYZus{}01}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gm\PYZus{}01\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{gm\PYZus{}02}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gm\PYZus{}02\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{indexes}\PY{p}{,} \PY{n}{xm}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{xm\PYZus{}n\PYZus{}feature = \PYZob{}\PYZcb{}, n\PYZus{}samples = \PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n\PYZus{}features}\PY{p}{,} \PY{n}{n\PYZus{}samples}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+n\_samples = 1000, n\_features = 20, n\_cluster = 3, gm\_01\_score = 0.647659073071, gm\_02\_score = 0.647659073071, xm\_score = 0.647659073071
+n\_samples = 1000, n\_features = 20, n\_cluster = 4, gm\_01\_score = 0.750423054731, gm\_02\_score = 0.750423054731, xm\_score = 0.750423054731
+n\_samples = 1000, n\_features = 20, n\_cluster = 5, gm\_01\_score = 0.78890355561, gm\_02\_score = 0.78890355561, xm\_score = 0.78890355561
+n\_samples = 1000, n\_features = 20, n\_cluster = 6, gm\_01\_score = 0.782315086816, gm\_02\_score = 0.782315086816, xm\_score = 0.782315086816
+n\_samples = 1000, n\_features = 20, n\_cluster = 7, gm\_01\_score = 0.773990963568, gm\_02\_score = 0.773990963568, xm\_score = 0.773990963568
+n\_samples = 1000, n\_features = 20, n\_cluster = 8, gm\_01\_score = 0.774914378221, gm\_02\_score = 0.774914378221, xm\_score = 0.605219562241
+n\_samples = 1000, n\_features = 20, n\_cluster = 9, gm\_01\_score = 0.767586206923, gm\_02\_score = 0.767586206923, xm\_score = 0.581517682204
+n\_samples = 1000, n\_features = 20, n\_cluster = 10, gm\_01\_score = 0.763665051189, gm\_02\_score = 0.770226298973, xm\_score = 0.545558886189
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    When dimention is hight, the gm seems performs better than X-mean. The
+reason we think is that, we dimension is high, each cluster is much
+separable than in low dimension. Then when data is relatively easy to
+separate. G-means can performs very well.
+
+\paragraph{What about the case the data is stretch to be long
+shape?}\label{what-about-the-case-the-data-is-stretch-to-be-long-shape}
+
+    \subsubsection{Part Five: test data when the data is stretched to some
+shape, to test if X-means is tend to overfit as the paper
+claimed.}\label{part-five-test-data-when-the-data-is-stretched-to-some-shape-to-test-if-x-means-is-tend-to-overfit-as-the-paper-claimed.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{comparison\PYZus{}between\PYZus{}k\PYZus{}x\PYZus{}and\PYZus{}g\PYZus{}with\PYZus{}shaped\PYZus{}data}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{comparison\PYZus{}between\PYZus{}k\PYZus{}x\PYZus{}and\PYZus{}g\PYZus{}with\PYZus{}shaped\PYZus{}data}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{It seems the X-means did not tend to
+overfit.}\label{it-seems-the-x-means-did-not-tend-to-overfit.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{comparison\PYZus{}between\PYZus{}k\PYZus{}x\PYZus{}and\PYZus{}g\PYZus{}with\PYZus{}shaped\PYZus{}data}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{,} \PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{assignment_2_report_files/assignment_2_report_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Again, it seems the G-mean tend to overfit when the clusters
+are crowed
+together}\label{again-it-seems-the-g-mean-tend-to-overfit-when-the-clusters-are-crowed-together}
+
+\subsubsection{Summary}\label{summary}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  G-means can automatically make a good k when the data is sperately
+  well from each other
+\item
+  Otherwise, when data clusters is crowed together, they don't do it
+  well
+\item
+  The reason is it must assume the data cluster to separate must be
+  sperical.
+\end{enumerate}
+
+    test cite: this paper from \cite{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PYZpc{}\PYZpc{}bash
+        ipython nbconvert \PYZhy{}\PYZhy{}to latex \PYZhy{}\PYZhy{}template citations.tplx assignment\PYZus{}2\PYZus{}report
+        pdflatex assignment\PYZus{}2\PYZus{}report.tex
+        bibtex assignment\PYZus{}2\PYZus{}report
+        pdflatex assignment\PYZus{}2\PYZus{}report.tex
+        \PY{c+c1}{\PYZsh{} pdflatex assignment\PYZus{}2\PYZus{}report.tex}
+        \PY{c+c1}{\PYZsh{} pdflatex assignment\PYZus{}2\PYZus{}report.tex}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex)
+ restricted \textbackslash{}write18 enabled.
+entering extended mode
+(./assignment\_2\_report.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/size11.clo))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1enc.def))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/mathpazo.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty))))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption3.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/xkeyval/xkvutils.tex)))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/adjustbox/adjcalc.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/adjustbox/trimclip.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/collectbox/collectbox.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/adjustbox/tc-pdftex.def))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/varwidth/varwidth.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/color.cfg))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/enumerate.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifvtex.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/ifxetex/ifxetex.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/upquote/upquote.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/eurosym/eurosym.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grffile.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty))))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/hyperref.cfg)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/url/url.sty))
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/ulem/ulem.sty)
+(./assignment\_2\_report.aux)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ppl.fd)
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/ltcaption.sty)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \textbackslash{}paperwidth=614.295pt
+* \textbackslash{}paperheight=794.96999pt
+* \textbackslash{}textwidth=469.75502pt
+* \textbackslash{}textheight=650.43001pt
+* \textbackslash{}oddsidemargin=0.0pt
+* \textbackslash{}evensidemargin=0.0pt
+* \textbackslash{}topmargin=-37.0pt
+* \textbackslash{}headheight=12.0pt
+* \textbackslash{}headsep=25.0pt
+* \textbackslash{}topskip=11.0pt
+* \textbackslash{}footskip=30.0pt
+* \textbackslash{}marginparwidth=59.0pt
+* \textbackslash{}marginparsep=10.0pt
+* \textbackslash{}columnsep=10.0pt
+* \textbackslash{}skip\textbackslash{}footins=10.0pt plus 4.0pt minus 2.0pt
+* \textbackslash{}hoffset=0.0pt
+* \textbackslash{}voffset=0.0pt
+* \textbackslash{}mag=1000
+* \textbackslash{}@twocolumnfalse
+* \textbackslash{}@twosidefalse
+* \textbackslash{}@mparswitchfalse
+* \textbackslash{}@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ucs/ucsencs.def)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(./assignment\_2\_report.out) (./assignment\_2\_report.out)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1ppl.fd)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omlzplm.fd)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omszplm.fd)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omxzplm.fd)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1zplm.fd)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/ts1cmtt.fd) [1\{/usr/local/te
+xlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map\}] [2] [3] [4] [5]
+[6] [7] [8] [9] [10] [11] [12] [13] [14]
+<assignment\_2\_report\_files/assignment\_2\_report\_9\_1.png, id=73, 375.4025pt x 252
+.945pt> <use assignment\_2\_report\_files/assignment\_2\_report\_9\_1.png> [15]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1011--1012
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_10\_1.png, id=81, 381.425pt x 252
+.945pt> <use assignment\_2\_report\_files/assignment\_2\_report\_10\_1.png> [16 <./ass
+ignment\_2\_report\_files/assignment\_2\_report\_9\_1.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1032--1033
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_11\_1.png, id=87, 385.44pt x 252.
+945pt> <use assignment\_2\_report\_files/assignment\_2\_report\_11\_1.png> [17 <./assi
+gnment\_2\_report\_files/assignment\_2\_report\_10\_1.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1053--1054
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_13\_1.png, id=93, 381.425pt x 252
+.945pt> <use assignment\_2\_report\_files/assignment\_2\_report\_13\_1.png> [18 <./ass
+ignment\_2\_report\_files/assignment\_2\_report\_11\_1.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1077--1078
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_15\_0.png, id=99, 487.8225pt x 48
+3.8075pt> <use assignment\_2\_report\_files/assignment\_2\_report\_15\_0.png> [19 <./a
+ssignment\_2\_report\_files/assignment\_2\_report\_13\_1.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1091--1092
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_16\_0.png, id=107, 496.85625pt x 
+483.8075pt> <use assignment\_2\_report\_files/assignment\_2\_report\_16\_0.png>
+[20 <./assignment\_2\_report\_files/assignment\_2\_report\_15\_0.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1101--1102
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_19\_0.png, id=113, 490.83376pt x 
+483.8075pt> <use assignment\_2\_report\_files/assignment\_2\_report\_19\_0.png>
+[21 <./assignment\_2\_report\_files/assignment\_2\_report\_16\_0.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1121--1122
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_21\_0.png, id=120, 500.87125pt x 
+483.8075pt> <use assignment\_2\_report\_files/assignment\_2\_report\_21\_0.png>
+[22 <./assignment\_2\_report\_files/assignment\_2\_report\_19\_0.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1137--1138
+
+[23 <./assignment\_2\_report\_files/assignment\_2\_report\_21\_0.png>]
+<assignment\_2\_report\_files/assignment\_2\_report\_24\_1.png, id=132, 382.42876pt x 
+252.945pt> <use assignment\_2\_report\_files/assignment\_2\_report\_24\_1.png>
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1192--1193
+
+[24 <./assignment\_2\_report\_files/assignment\_2\_report\_24\_1.png>]
+<assignment\_2\_report\_files/assignment\_2\_report\_26\_1.png, id=138, 382.42876pt x 
+252.945pt> <use assignment\_2\_report\_files/assignment\_2\_report\_26\_1.png>
+[25]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1246--1247
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_29\_0.png, id=144, 496.85625pt x 
+483.8075pt> <use assignment\_2\_report\_files/assignment\_2\_report\_29\_0.png>
+[26 <./assignment\_2\_report\_files/assignment\_2\_report\_26\_1.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1268--1269
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_30\_0.png, id=152, 487.8225pt x 4
+83.8075pt> <use assignment\_2\_report\_files/assignment\_2\_report\_30\_0.png>
+[27 <./assignment\_2\_report\_files/assignment\_2\_report\_29\_0.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1278--1279
+
+
+<assignment\_2\_report\_files/assignment\_2\_report\_32\_0.png, id=158, 487.8225pt x 4
+83.8075pt> <use assignment\_2\_report\_files/assignment\_2\_report\_32\_0.png>
+[28 <./assignment\_2\_report\_files/assignment\_2\_report\_30\_0.png>]
+Underfull \textbackslash{}hbox (badness 10000) in paragraph at lines 1291--1292
+
+[29 <./assignment\_2\_report\_files/assignment\_2\_report\_32\_0.png>] [30] [31]
+[32] [33]
+! Undefined control sequence.
+l.1525 \textbackslash{}bibliographystle
+                        \{plain\}
+? Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or {\ldots} or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or {\ldots} or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or {\ldots} or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? Type <return> to proceed, S to scroll future error messages,
+R to run without stopping, Q to run quietly,
+I to insert something, E to edit your file,
+1 or {\ldots} or 9 to ignore the next 1 to 9 tokens of input,
+H for help, X to quit.
+? 
+! Emergency stop.
+l.1525 \textbackslash{}bibliographystle
+                        \{plain\}
+!  ==> Fatal error occurred, no output PDF file produced!
+Transcript written on assignment\_2\_report.log.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[TerminalIPythonApp] WARNING | Subcommand `ipython nbconvert` is deprecated and will be removed in future versions.
+[TerminalIPythonApp] WARNING | You likely want to use `jupyter nbconvert` in the future
+[NbConvertApp] Converting notebook assignment\_2\_report.ipynb to latex
+[NbConvertApp] Support files will be in assignment\_2\_report\_files/
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Making directory assignment\_2\_report\_files
+[NbConvertApp] Writing 130898 bytes to assignment\_2\_report.tex
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+\bibliographystle{unsrt}
+\bibliography{jupyter}
+
+    
+    \end{document}

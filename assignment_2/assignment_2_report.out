@@ -1,0 +1,8 @@
+\BOOKMARK [2][-]{subsection.0.1}{Our Implementation}{}% 1
+\BOOKMARK [2][-]{subsection.0.2}{Experiment}{}% 2
+\BOOKMARK [3][-]{subsubsection.0.2.1}{Part one, G-means is good: we want to demenstrate that G-means can automatically detect the number of clusters}{subsection.0.2}% 3
+\BOOKMARK [3][-]{subsubsection.0.2.2}{Part two, after we found the G-means seems not stable, we do more test to see if it is stable}{subsection.0.2}% 4
+\BOOKMARK [3][-]{subsubsection.0.2.3}{Part Three: what about their comparision with X-means. In paper, G-means is described as can performe better than X-means}{subsection.0.2}% 5
+\BOOKMARK [3][-]{subsubsection.0.2.4}{Part Four: for curiosity, we compare the G-means and X-means useing different setting for different round, and collect their performance}{subsection.0.2}% 6
+\BOOKMARK [3][-]{subsubsection.0.2.5}{Part Five: test data when the data is stretched to some shape, to test if X-means is tend to overfit as the paper claimed.}{subsection.0.2}% 7
+\BOOKMARK [3][-]{subsubsection.0.2.6}{Summary}{subsection.0.2}% 8
