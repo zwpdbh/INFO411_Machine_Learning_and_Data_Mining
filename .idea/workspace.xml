@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e2f9305-ee4c-41ae-bfcb-2d684866ca4d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/GMeans.py" afterPath="$PROJECT_DIR$/assignment_2/GMeans.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment_2/Tools.py" afterPath="$PROJECT_DIR$/assignment_2/Tools.py" />
-    </list>
+    <list default="true" id="8e2f9305-ee4c-41ae-bfcb-2d684866ca4d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
