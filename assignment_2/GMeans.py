@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.cluster import KMeans
 from scipy.stats import anderson
 from Tools import Tools
-import matplotlib.pyplot as pl
+import matplotlib.pyplot as plt
 from sklearn.datasets.samples_generator import make_blobs
 from sklearn import cluster, datasets, mixture
 from XMeans import XMeans
@@ -396,70 +396,70 @@ def summary(n_samples, min_n_clusters, max_n_clusters, n_features, random_state=
 
 
 def comparison_gm(n_samples, n_clusters, n_features, random_state):
-    pl.figure(figsize=(8, 8))
-    fig = pl.gcf()
+    plt.figure(figsize=(8, 8))
+    fig = plt.gcf()
     fig.canvas.set_window_title("3 results from g-means, when n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
 
     X, y = datasets.make_blobs(n_samples, n_features, centers=n_clusters, random_state=random_state)
     X = StandardScaler().fit_transform(X)
-    pl.subplot(221)
+    plt.subplot(221)
     Tools.draw(X, y)
     # Tools.draw(X, km.labels_, km.cluster_centers_, "k-means")
-    pl.title("Ground Truth: n_clusters = {}".format(n_clusters))
+    plt.title("Ground Truth: n_clusters = {}".format(n_clusters))
 
-    pl.subplot(222)
+    plt.subplot(222)
     gm_01 = GMeans_01().fit(X)
     Tools.draw(X, gm_01.labels, gm_01.centroids)
-    pl.title("G-means: n_clusters = {}".format(len(gm_01.centroids)))
+    plt.title("G-means: n_clusters = {}".format(len(gm_01.centroids)))
 
-    pl.subplot(223)
+    plt.subplot(223)
     gm_02 = GMeans_01().fit(X)
     Tools.draw(X, gm_02.labels, gm_02.centroids)
-    pl.title("G-means: n_clusters = {}".format(len(gm_02.centroids)))
+    plt.title("G-means: n_clusters = {}".format(len(gm_02.centroids)))
 
-    pl.subplot(224)
+    plt.subplot(224)
     gm_03 = GMeans_01().fit(X)
     Tools.draw(X, gm_03.labels, gm_03.centroids)
-    pl.title("G-means: n_clusters = {}".format(len(gm_03.centroids)))
+    plt.title("G-means: n_clusters = {}".format(len(gm_03.centroids)))
 
 
-    pl.show()
+    plt.show()
 
 def comparison_between_k_x_and_g(n_samples, n_clusters, n_features, random_state):
-    pl.figure(figsize=(8, 8))
-    fig = pl.gcf()
-    fig.canvas.set_window_title("n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
+    plt.figure(figsize=(8, 8))
+    fig = plt.gcf()
+    fig.canvas.set_window_title("compare K_G_X, n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
 
     X, y = datasets.make_blobs(n_samples, n_features, centers=n_clusters, random_state=random_state)
     X = StandardScaler().fit_transform(X)
 
-    pl.subplot(221)
+    plt.subplot(221)
     Tools.draw(X, y)
     # Tools.draw(X, km.labels_, km.cluster_centers_, "k-means")
-    pl.title("Ground Truth: n_clusters = {}".format(n_clusters))
+    plt.title("Ground Truth: n_clusters = {}".format(n_clusters))
 
-    pl.subplot(222)
+    plt.subplot(222)
     km = KMeans(n_clusters=n_clusters, random_state=random_state).fit(X)
     Tools.draw(X, km.labels_, km.cluster_centers_)
-    pl.title("Using K-means with n_clusters = {}".format(n_clusters))
+    plt.title("Using K-means with n_clusters = {}".format(n_clusters))
 
-    pl.subplot(223)
+    plt.subplot(223)
     gm = GMeans_01().fit(X)
     Tools.draw(X, gm.labels, gm.centroids)
-    pl.title("G-means: n_clusters = {}".format(len(gm.centroids)))
+    plt.title("G-means: n_clusters = {}".format(len(gm.centroids)))
 
-    pl.subplot(224)
+    plt.subplot(224)
     xm = XMeans().fit(X)
     Tools.draw(X, xm.labels_, xm.cluster_centers_)
-    pl.title("X-means: n_clusters = {}".format(len(xm.cluster_centers_)))
+    plt.title("X-means: n_clusters = {}".format(len(xm.cluster_centers_)))
 
 
-    pl.show()
+    plt.show()
 
 
 def comparison_between_k_x_and_g_with_shaped_data(n_samples, n_clusters, random_state):
-    pl.figure(figsize=(8, 8))
-    fig = pl.gcf()
+    plt.figure(figsize=(8, 8))
+    fig = plt.gcf()
     fig.canvas.set_window_title("compare k-means, g-means and x-means in mixture model situation")
 
     X, y = make_blobs(n_samples=n_samples, random_state=random_state, centers=n_clusters)
@@ -468,27 +468,27 @@ def comparison_between_k_x_and_g_with_shaped_data(n_samples, n_clusters, random_
     transformation = [[0.60834549, -0.63667341], [-0.40887718, 0.85253229]]
     X = np.dot(X, transformation)
 
-    pl.subplot(221)
+    plt.subplot(221)
     Tools.draw(X, y)
     # Tools.draw(X, km.labels_, km.cluster_centers_, "k-means")
-    pl.title("Ground Truth: n_clusters = {}".format(n_clusters))
+    plt.title("Ground Truth: n_clusters = {}".format(n_clusters))
 
-    pl.subplot(222)
+    plt.subplot(222)
     km = KMeans(n_clusters=n_clusters, random_state=random_state).fit(X)
     Tools.draw(X, km.labels_, km.cluster_centers_)
-    pl.title("Using K-means with n_clusters = {}".format(n_clusters))
+    plt.title("Using K-means with n_clusters = {}".format(n_clusters))
 
-    pl.subplot(223)
+    plt.subplot(223)
     gm = GMeans_01().fit(X)
     Tools.draw(X, gm.labels, gm.centroids, interim_centers=gm.interim_centroids)
-    pl.title("G-means: n_clusters = {}".format(len(gm.centroids)))
+    plt.title("G-means: n_clusters = {}".format(len(gm.centroids)))
 
-    pl.subplot(224)
+    plt.subplot(224)
     xm = XMeans().fit(X)
     Tools.draw(X, xm.labels_, xm.cluster_centers_)
-    pl.title("X-means: n_clusters = {}".format(len(xm.cluster_centers_)))
+    plt.title("X-means: n_clusters = {}".format(len(xm.cluster_centers_)))
 
-    pl.show()
+    plt.show()
 
 
 # collect a group of score while changing the number of centers
@@ -523,23 +523,23 @@ def plot_summary():
 
 
     # sampling
-    n_features = 2
+    n_features = 12
     n_samples = 1000
     random_state = 0
     gm_01, gm_02, xm = summary(n_samples, min_n_cluster, max_n_cluster, n_features=n_features, random_state=random_state,
                          n_loops=n_loops)
 
-    fig = pl.gcf()
+    fig = plt.gcf()
     fig.canvas.set_window_title(
         "n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
 
-    pl.plot(indexes, gm_01, label="gm_01_n_feature = {}, n_samples = {}".format(n_features, n_samples))
-    pl.plot(indexes, gm_02, label="gm_02_n_feature = {}, n_samples = {}".format(n_features, n_samples))
-    pl.plot(indexes, xm, '--', label="xm_n_feature = {}, n_samples = {}".format(n_features, n_samples))
+    plt.plot(indexes, gm_01, label="gm_01_n_feature = {}, n_samples = {}".format(n_features, n_samples))
+    plt.plot(indexes, gm_02, label="gm_02_n_feature = {}, n_samples = {}".format(n_features, n_samples))
+    plt.plot(indexes, xm, '--', label="xm_n_feature = {}, n_samples = {}".format(n_features, n_samples))
 
 
-    pl.legend()
-    pl.show()
+    plt.legend()
+    plt.show()
 
 if __name__ == '__main__':
     # n_clusters = 3
@@ -547,14 +547,14 @@ if __name__ == '__main__':
     # gm = GMeans_01().fit(X)
     # print "n_cluster = {} ".format(n_clusters), silhouette_score(X, gm.labels, metric='euclidean')
     # Tools.draw(X, gm.labels, gm.centroids, title="g-means")
-    # pl.show()
+    # plt.show()
 
 
 
     # plot_summary()
 
-    # comparison_between_k_x_and_g(n_clusters=10, n_samples=2300, n_features=2, random_state=0)
-    # comparison_gm(n_clusters=10, n_samples=2300, n_features=2, random_state=100)
+    # comparison_gm(n_clusters=10, n_samples=1000, n_features=2, random_state=100)
+    # comparison_between_k_x_and_g(n_clusters=10, n_samples=2300, n_features=2, random_state=100)
     comparison_between_k_x_and_g_with_shaped_data(n_samples=500, n_clusters=5, random_state=50)
 
     # collect_silhouette_score_for_gmeans()

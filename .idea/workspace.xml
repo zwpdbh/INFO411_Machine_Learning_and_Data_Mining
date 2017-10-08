@@ -27,8 +27,8 @@
       <file leaf-file-name="GMeans.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="482" column="79" lean-forward="false" selection-start-line="482" selection-start-column="79" selection-end-line="482" selection-end-column="79" />
+            <state relative-caret-position="1413">
+              <caret line="557" column="4" lean-forward="true" selection-start-line="557" selection-start-column="4" selection-end-line="557" selection-end-column="95" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -39,10 +39,23 @@
       <file leaf-file-name="Tools.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="87" column="43" lean-forward="false" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
+            <state relative-caret-position="386">
+              <caret line="81" column="31" lean-forward="true" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XMeans.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assignment_2/XMeans.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="622">
+              <caret line="153" column="27" lean-forward="true" selection-start-line="90" selection-start-column="0" selection-end-line="153" selection-end-column="27" />
+              <folding>
+                <element signature="n#!!doc" expanded="false" />
+                <element signature="e#3357#3375#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,9 +72,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>computeTPR</find>
-      <find>_</find>
-      <find>_[</find>
       <find>computeKMeans</find>
       <find>distBetween</find>
       <find>kmean</find>
@@ -89,7 +99,13 @@
       <find>drawClusters</find>
       <find>draw</find>
       <find>comparison_between_k_x_and_g_with_shaped_data</find>
+      <find>self.PCA</find>
+      <find>plot_summary</find>
+      <find>pl.</find>
     </findStrings>
+    <replaceStrings>
+      <replace>plt.</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -134,9 +150,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="508" />
-    <option name="y" value="44" />
-    <option name="width" value="1405" />
+    <option name="x" value="341" />
+    <option name="y" value="23" />
+    <option name="width" value="1099" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -157,8 +173,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -175,6 +189,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -515,14 +531,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="508" y="44" width="1405" height="877" extended-state="0" />
+    <frame x="341" y="23" width="1099" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1724138" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24030274" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23593964" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28644502" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28644502" sideWeight="0.49713877" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -536,6 +551,7 @@
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="11" y="23" width="818" height="822" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286445" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -830,9 +846,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/XMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="95" column="8" lean-forward="false" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="8" />
+        <state relative-caret-position="622">
+          <caret line="153" column="27" lean-forward="true" selection-start-line="90" selection-start-column="0" selection-end-line="153" selection-end-column="27" />
           <folding>
+            <element signature="n#!!doc" expanded="false" />
             <element signature="e#3357#3375#0" expanded="true" />
           </folding>
         </state>
@@ -840,8 +857,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/GMeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="482" column="79" lean-forward="false" selection-start-line="482" selection-start-column="79" selection-end-line="482" selection-end-column="79" />
+        <state relative-caret-position="1413">
+          <caret line="557" column="4" lean-forward="true" selection-start-line="557" selection-start-column="4" selection-end-line="557" selection-end-column="95" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -850,8 +867,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assignment_2/Tools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="87" column="43" lean-forward="false" selection-start-line="87" selection-start-column="43" selection-end-line="87" selection-end-column="43" />
+        <state relative-caret-position="386">
+          <caret line="81" column="31" lean-forward="true" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>

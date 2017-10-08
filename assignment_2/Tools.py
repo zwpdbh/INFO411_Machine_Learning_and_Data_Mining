@@ -82,10 +82,10 @@ class Tools:
             for c in centroids:
                 plt.plot(c[0], c[1], 'ro')
 
-        if interim_centers != None:
-            if len(interim_centers) > 0:
-                for c in interim_centers:
-                    plt.plot(c[0], c[1], 'g*')
+        # if interim_centers != None:
+        #     if len(interim_centers) > 0:
+        #         for c in interim_centers:
+        #             plt.plot(c[0], c[1], 'g*')
 
 
         # draw each point
