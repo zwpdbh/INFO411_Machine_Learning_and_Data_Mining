@@ -24,6 +24,7 @@ class GMeans_01:
         self.X = None
         self.labels = []
         self.index_result = []
+        self.interim_centroids = []
 
     def __recursive_cluster_index(self, indexes):
         if len(indexes) < 2:
@@ -35,6 +36,8 @@ class GMeans_01:
         centroid = np.mean(self.X[indexes], axis=0)
         # no intialize centroid, just use k++
         km = self.KMeans().split(dataSet=self.X, index_records=indexes)
+        self.interim_centroids.append(km.c_0.copy())
+        self.interim_centroids.append(km.c_1.copy())
         v = km.c_0 - km.c_1
 
         X_prime = self.get_X_prime(self.X[indexes], v)
@@ -69,9 +72,10 @@ class GMeans_01:
         return self
 
     def get_X_prime(self, X, v):
+        X_copy = X.copy()
         # normalize v, need?
         v = v / np.sqrt(v.T * v)
-        X_prime = scale(X.dot(v) / (v.dot(v)))
+        X_prime = scale(X_copy.dot(v) / (v.dot(v)))
 
         return X_prime
 
@@ -201,9 +205,10 @@ class GMeans_02:
         return self
 
     def get_X_prime(self, X, v):
+        X_copy = X.copy()
         # normalize v, need?
         v = v / np.sqrt(v.T * v)
-        X_prime = scale(X.dot(v) / (v.dot(v)))
+        X_prime = scale(X_copy.dot(v) / (v.dot(v)))
 
         return X_prime
 
@@ -339,7 +344,7 @@ def demo_XMean():
     xm = XMeans()
     xm = xm.fit(X)
 
-    Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_)
+    Tools.draw(X=X, lables=xm.labels_, centroids=xm.cluster_centers_, interim_centers=None)
 
 
 def summary(n_samples, min_n_clusters, max_n_clusters, n_features, random_state=0, n_loops=10):
@@ -357,13 +362,20 @@ def summary(n_samples, min_n_clusters, max_n_clusters, n_features, random_state=
             X, y = datasets.make_blobs(n_samples=n_samples, n_features=n_features, centers=n_cluster,
                                        random_state=random_state)
             X = StandardScaler().fit_transform(X)
-            gm_01 = GMeans_01().fit(X)
-            gm_02 = GMeans_02().fit(X)
-            xm = XMeans().fit(X)
 
-            gm_01_score = silhouette_score(X, gm_01.labels, metric='euclidean')
-            gm_02_score = silhouette_score(X, gm_02.labels, metric='euclidean')
-            xm_score = silhouette_score(X, xm.labels_, metric='euclidean')
+            X_1 = X.copy()
+            X_2 = X.copy()
+            X_3 = X.copy()
+
+            gm_01 = GMeans_01().fit(X_1)
+            gm_02 = GMeans_02().fit(X_2)
+            xm = XMeans().fit(X_3)
+
+            gm_01_score = silhouette_score(X_1, gm_01.labels, metric='euclidean')
+            gm_02_score = silhouette_score(X_2, gm_02.labels, metric='euclidean')
+            xm_score = silhouette_score(X_3, xm.labels_, metric='euclidean')
+
+            # print "xm = {}".format(xm_score)
 
             total_gm_01_score += gm_01_score
             total_gm_02_score += gm_02_score
@@ -413,7 +425,7 @@ def comparison_gm(n_samples, n_clusters, n_features, random_state):
 
     pl.show()
 
-def comparison(n_samples, n_clusters, n_features, random_state):
+def comparison_between_k_x_and_g(n_samples, n_clusters, n_features, random_state):
     pl.figure(figsize=(8, 8))
     fig = pl.gcf()
     fig.canvas.set_window_title("n_samples = {}, n_features = {}, random_state = {}".format(n_samples, n_features, random_state))
@@ -444,7 +456,8 @@ def comparison(n_samples, n_clusters, n_features, random_state):
 
     pl.show()
 
-def comparion_mixture_models(n_samples, n_clusters, random_state):
+
+def comparison_between_k_x_and_g_with_shaped_data(n_samples, n_clusters, random_state):
     pl.figure(figsize=(8, 8))
     fig = pl.gcf()
     fig.canvas.set_window_title("compare k-means, g-means and x-means in mixture model situation")
@@ -467,7 +480,7 @@ def comparion_mixture_models(n_samples, n_clusters, random_state):
 
     pl.subplot(223)
     gm = GMeans_01().fit(X)
-    Tools.draw(X, gm.labels, gm.centroids)
+    Tools.draw(X, gm.labels, gm.centroids, interim_centers=gm.interim_centroids)
     pl.title("G-means: n_clusters = {}".format(len(gm.centroids)))
 
     pl.subplot(224)
@@ -476,6 +489,27 @@ def comparion_mixture_models(n_samples, n_clusters, random_state):
     pl.title("X-means: n_clusters = {}".format(len(xm.cluster_centers_)))
 
     pl.show()
+
+
+# collect a group of score while changing the number of centers
+def collect_silhouette_score_for_gmeans():
+    min_n_clusters = 3
+    max_n_clusters = 30
+    n_features = 2
+    n_samples = [1000, 2000, 3000, 4000, 5000]
+    for n in n_samples:
+        for n_cluster in np.linspace(min_n_clusters, max_n_clusters, max_n_clusters - min_n_clusters + 1):
+            n_cluster = n_cluster.astype(int)
+            X, y = datasets.make_blobs(n_samples=n, n_features=n_features, centers=n_cluster, random_state=0)
+          #  X = StandardScaler().fit_transform(X)
+            gm = GMeans_01().fit(X)
+            xm = XMeans().fit(X)
+            print "n_samples = {}, n_cluster = {}, n_features = {}, G-means score = {} \t X means score = {}". \
+                format(n, n_cluster, n_features, silhouette_score(X, gm.labels, metric='euclidean'),silhouette_score(X, xm.labels_, metric='euclidean'))
+
+            # print "n_samples = {}, n_cluster = {}, G-means score = {} \t X means score = {}". \
+            #     format(n, n_cluster,calinski_harabaz_score(X, xm.labels_),calinski_harabaz_score(X, gm.labels))
+
 
 def plot_summary():
     # run different set of data to draw graph
@@ -489,8 +523,8 @@ def plot_summary():
 
 
     # sampling
-    n_features = 8
-    n_samples = 2000
+    n_features = 2
+    n_samples = 1000
     random_state = 0
     gm_01, gm_02, xm = summary(n_samples, min_n_cluster, max_n_cluster, n_features=n_features, random_state=random_state,
                          n_loops=n_loops)
@@ -515,17 +549,13 @@ if __name__ == '__main__':
     # Tools.draw(X, gm.labels, gm.centroids, title="g-means")
     # pl.show()
 
-    # collect_silhouette_score_for_gmeans()
-    # collect_silhouette_score_for_xmeans()
-    #
-    # show_different_clusters_with_k_means()
-    # show_different_clusters_with_g_means()
 
-    plot_summary()
 
-    # comparison(n_clusters=10, n_samples=2300, n_features=2, random_state=0)
+    # plot_summary()
+
+    # comparison_between_k_x_and_g(n_clusters=10, n_samples=2300, n_features=2, random_state=0)
     # comparison_gm(n_clusters=10, n_samples=2300, n_features=2, random_state=100)
+    comparison_between_k_x_and_g_with_shaped_data(n_samples=500, n_clusters=5, random_state=50)
 
-    # comparion_mixture_models(n_samples=800, n_clusters=5, random_state=50)
-
+    # collect_silhouette_score_for_gmeans()
 

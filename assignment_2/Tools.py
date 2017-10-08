@@ -60,7 +60,7 @@ class Tools:
                 plt.scatter(each[0], each[1], s=1, c=colors[label % len(colors)])
 
     @staticmethod
-    def draw(X, lables, centroids=[], title=None):
+    def draw(X, lables, centroids=[], title=None, interim_centers=None):
         Ys = np.array([[4, 8, 12, 16],
                        [1, 4, 9, 16],
                        [17, 10, 13, 18],
@@ -81,6 +81,12 @@ class Tools:
         if len(centroids) > 0:
             for c in centroids:
                 plt.plot(c[0], c[1], 'ro')
+
+        if interim_centers != None:
+            if len(interim_centers) > 0:
+                for c in interim_centers:
+                    plt.plot(c[0], c[1], 'g*')
+
 
         # draw each point
         for i in range(len(lables)):
